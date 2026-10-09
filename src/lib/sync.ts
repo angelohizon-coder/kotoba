@@ -12,66 +12,72 @@ const firebaseConfig = {
 };
 
 export function setupSync(repository: any, onExternalUpdate: (progress: any) => void, onAuthChange: () => void) {
-  if (typeof firebase === 'undefined') return;
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
-
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-
-  let currentUser = null;
-  let unsubscribeSync = null;
-  let isSavingToCloud = false;
-
-  const originalSave = repository.save;
-  
-  repository.save = (progress) => {
-    originalSave(progress);
-    if (currentUser && !isSavingToCloud) {
-      db.collection('users').doc(currentUser.uid).set({
-        progress: progress,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).catch(err => console.error("Firebase sync error:", err));
+  try {
+    if (typeof firebase === 'undefined') return;
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
     }
-  };
 
-  auth.onAuthStateChanged(user => {
-    currentUser = user;
-    if (unsubscribeSync) {
-      unsubscribeSync();
-      unsubscribeSync = null;
-    }
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    let currentUser = null;
+    let unsubscribeSync = null;
+    let isSavingToCloud = false;
+
+    const originalSave = repository.save;
     
-    onAuthChange();
+    repository.save = (progress) => {
+      const result = originalSave(progress);
+      if (currentUser && !isSavingToCloud) {
+        db.collection('users').doc(currentUser.uid).set({
+          progress: progress,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(err => console.error("Firebase sync error:", err));
+      }
+      return result;
+    };
 
-    if (user) {
-      unsubscribeSync = db.collection('users').doc(user.uid).onSnapshot(doc => {
-        if (doc.exists) {
-          const data = doc.data();
-          if (data.progress) {
-            // Prevent save loop when updating from cloud
-            isSavingToCloud = true;
-            try {
-              const validated = repository.validate(data.progress);
-              repository.save(validated);
-              onExternalUpdate(validated);
-            } catch (e) {
-              console.error("Invalid cloud progress", e);
+    auth.onAuthStateChanged(user => {
+      currentUser = user;
+      if (unsubscribeSync) {
+        unsubscribeSync();
+        unsubscribeSync = null;
+      }
+      
+      onAuthChange();
+
+      if (user) {
+        unsubscribeSync = db.collection('users').doc(user.uid).onSnapshot(doc => {
+          if (doc.exists) {
+            const data = doc.data();
+            if (data.progress) {
+              // Prevent save loop when updating from cloud
+              isSavingToCloud = true;
+              try {
+                const validated = repository.validate(data.progress);
+                repository.save(validated);
+                onExternalUpdate(validated);
+              } catch (e) {
+                console.error("Invalid cloud progress", e);
+              }
+              isSavingToCloud = false;
             }
-            isSavingToCloud = false;
           }
-        }
-      });
-    }
-  });
+        });
+      }
+    });
 
-  return {
-    login: () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider).catch(err => alert("Login failed: " + err.message));
-    },
-    logout: () => auth.signOut(),
-    getCurrentUser: () => currentUser
-  };
+    return {
+      login: () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).catch(err => alert("Login failed: " + err.message));
+      },
+      logout: () => auth.signOut(),
+      getCurrentUser: () => currentUser
+    };
+  } catch (err) {
+    console.error("Firebase sync setup failed:", err);
+    return undefined;
+  }
 }

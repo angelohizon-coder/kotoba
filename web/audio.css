@@ -1,0 +1,14 @@
+/* Device speech preferences affect synthesized practice, leaving supplied audio intact. */
+.audio-player .audio-preferences {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0 10px;
+}
+.audio-player .audio-preferences .field { min-width: 0; margin: 0; }
+.audio-player .audio-preferences .dropdown,
+.audio-player .audio-preferences select { width: 100%; max-width: 100%; }
+.audio-player .audio-style-note { color: var(--muted); font-size: 0.75rem; line-height: 1.75; margin: 10px 0 14px; }
+@media (max-width: 600px) {
+  .audio-player .audio-preferences { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+}

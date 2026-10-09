@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="260" viewBox="0 0 240 260" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Momo, Kotoba's tanuki study buddy</title>
+  <desc id="desc">A cheerful caramel-colored Japanese raccoon dog waves hello with a broad, rounded mitten paw. Momo has a dark eye mask, rosy cheeks, a fluffy tail, a little green leaf, and a teal school backpack.</desc>
+  <style>
+    /* The plain asset stays still. Its local #wave fragment is an optional greeting. */
+    #wave { transform-box: view-box; transform-origin: 75px 155px; }
+    #wave:target { animation: momo-paw-hello 1000ms ease-in-out 1; }
+    @keyframes momo-paw-hello {
+      0%, 100% { transform: rotate(0deg); }
+      18% { transform: rotate(12deg); }
+      38% { transform: rotate(-10deg); }
+      58% { transform: rotate(10deg); }
+      78% { transform: rotate(-6deg); }
+    }
+    @media (prefers-reduced-motion: reduce) { #wave:target { animation: none; } }
+  </style>
+
+  <ellipse cx="121" cy="242" rx="76" ry="9" fill="#556977" fill-opacity=".14"/>
+
+  <!-- A broad, dark-tipped tanuki tail and a little school backpack. -->
+  <path d="M161 219C195 232 222 211 222 179C222 159 210 147 196 153C181 160 187 184 169 184L161 219Z" fill="#D99046" stroke="#75472F" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M207 151C216 155 222 165 222 179C222 192 218 204 210 212C199 208 193 201 191 192C205 180 197 159 207 151Z" fill="#75472F"/>
+  <rect x="155" y="133" width="39" height="71" rx="16" fill="#1D9B96" stroke="#146B70" stroke-width="4"/>
+  <path d="M169 144H181M177 159V182" stroke="#5ACBC0" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Rounded body, feet, and a raised waving paw. -->
+  <ellipse cx="89" cy="230" rx="22" ry="13" fill="#75472F"/>
+  <ellipse cx="150" cy="230" rx="22" ry="13" fill="#75472F"/>
+  <g id="wave">
+    <path d="M75 155C54 151 45 132 35 117" stroke="#75472F" stroke-width="28" stroke-linecap="round"/>
+    <path d="M75 155C54 151 45 132 35 117" stroke="#D99046" stroke-width="20" stroke-linecap="round"/>
+    <path d="M26 124C17 119 13 109 16 100C19 91 28 86 37 89C45 91 47 98 46 105C52 104 55 108 53 113C50 122 38 129 26 124Z" fill="#D99046" stroke="#75472F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="31" cy="108" rx="8" ry="9" transform="rotate(-17 31 108)" fill="#FFE6BD"/>
+  </g>
+  <ellipse cx="120" cy="178" rx="58" ry="58" fill="#D99046" stroke="#75472F" stroke-width="4"/>
+  <ellipse cx="117" cy="186" rx="36" ry="36" fill="#FFE6BD"/>
+  <path d="M166 150C174 167 175 183 169 193" stroke="#146B70" stroke-width="9" stroke-linecap="round"/>
+  <path d="M173 165C183 170 184 183 177 190" stroke="#75472F" stroke-width="24" stroke-linecap="round"/>
+  <path d="M173 165C183 170 184 183 177 190" stroke="#D99046" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Small round ears, an oversized friendly face, and the signature eye mask. -->
+  <circle cx="72" cy="62" r="23" fill="#D99046" stroke="#75472F" stroke-width="4"/>
+  <circle cx="168" cy="62" r="23" fill="#D99046" stroke="#75472F" stroke-width="4"/>
+  <circle cx="72" cy="63" r="12" fill="#75472F"/>
+  <circle cx="168" cy="63" r="12" fill="#75472F"/>
+  <path d="M119 48C161 48 188 71 188 109C188 146 159 163 120 163C81 163 52 146 52 109C52 71 78 48 119 48Z" fill="#E7A355" stroke="#75472F" stroke-width="4"/>
+  <path d="M119 67C147 67 173 83 176 113C179 141 152 154 120 154C88 154 61 141 64 113C67 83 92 67 119 67Z" fill="#FFE6BD"/>
+  <path d="M120 92C111 76 90 77 77 88C61 102 73 123 91 125C105 127 114 116 120 116C126 116 135 127 149 125C167 123 179 102 163 88C150 77 129 76 120 92Z" fill="#75472F"/>
+  <ellipse cx="94" cy="102" rx="12" ry="16" fill="#FFFDF8"/>
+  <ellipse cx="146" cy="102" rx="12" ry="16" fill="#FFFDF8"/>
+  <ellipse cx="97" cy="105" rx="7" ry="10" fill="#293842"/>
+  <ellipse cx="149" cy="105" rx="7" ry="10" fill="#293842"/>
+  <circle cx="99" cy="100" r="3" fill="#FFFDF8"/>
+  <circle cx="151" cy="100" r="3" fill="#FFFDF8"/>
+  <ellipse cx="76" cy="126" rx="12" ry="7" fill="#F37B73"/>
+  <ellipse cx="164" cy="126" rx="12" ry="7" fill="#F37B73"/>
+  <path d="M113 118C113 113 127 113 127 118C127 121 123 124 120 124C117 124 113 121 113 118Z" fill="#293842"/>
+  <path d="M105 130C105 142 112 147 120 147C128 147 135 142 135 130C126 134 114 134 105 130Z" fill="#75472F"/>
+  <path d="M111 143C112 136 128 136 129 143C124 148 116 148 111 143Z" fill="#F37B73"/>
+
+  <!-- The leaf is a playful nod to traditional Japanese tanuki stories. -->
+  <path d="M120 49C121 40 126 33 132 28" stroke="#247C45" stroke-width="5" stroke-linecap="round"/>
+  <path d="M126 38C126 22 140 15 158 19C155 35 142 45 126 38Z" fill="#69C840" stroke="#247C45" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M128 37L145 26" stroke="#247C45" stroke-width="3" stroke-linecap="round"/>
+  <path d="M20 59L23 50L26 59L35 62L26 65L23 74L20 65L11 62L20 59Z" fill="#FFC54B"/>
+  <path d="M206 93L208 87L210 93L216 95L210 97L208 103L206 97L200 95L206 93Z" fill="#FFC54B"/>
+</svg>

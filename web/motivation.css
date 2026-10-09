@@ -1,0 +1,83 @@
+/* Optional learning rewards: scoped, fluid and accessible with every card color. */
+.motivation { --motivation-accent: #187954; --motivation-soft: #e5f6ec; min-width: 0; overflow-wrap: anywhere; }
+.motivation[data-cosmetic="sakura"] { --motivation-accent: #a52863; --motivation-soft: #fbeaf2; }
+.motivation[data-cosmetic="ocean"] { --motivation-accent: #176ba2; --motivation-soft: #e6f3fc; }
+.motivation[data-cosmetic="sunset"] { --motivation-accent: #a74a15; --motivation-soft: #fff0de; }
+.motivation[data-cosmetic="tanuki-star"] { --motivation-accent: #7255a0; --motivation-soft: #f2ebfc; }
+.motivation h2, .motivation h3 { margin: 0; color: var(--ink); }
+.motivation h2 { font-size: clamp(1.1rem, 2.1vw, 1.35rem); }
+.motivation h3 { font-size: 1.1rem; }
+.motivation-heading { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.motivation-heading > .icon { color: var(--motivation-accent); flex-shrink: 0; }
+.motivation-heading > div { flex: 1 1 160px; min-width: 0; }
+.motivation-copy { color: var(--muted); line-height: 1.6; font-size: .9rem; margin: 8px 0 0; }
+.motivation-starter { display: flex; gap: 16px; justify-content: space-between; align-items: center; flex-wrap: wrap; border-inline-start: 4px solid var(--motivation-accent); }
+.motivation-starter .motivation-heading { flex: 1 1 240px; }
+.motivation-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; margin: 18px 0; }
+.motivation-metric { display: flex; gap: 10px; align-items: center; min-width: 0; border: 1px solid var(--line); border-radius: 16px; padding: 14px; background: var(--surface, transparent); }
+.motivation-metric > .icon { color: var(--motivation-accent); flex: 0 0 22px; }
+.motivation-metric > div { display: grid; gap: 2px; }
+.motivation-metric strong { color: var(--ink); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.motivation-metric span { color: var(--muted); font-size: .8rem; }
+.motivation-meters { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px; margin: 14px 0; }
+.motivation-meter { min-width: 0; }
+.motivation-meter-label { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: .82rem; line-height: 1.5; }
+.motivation-meter-label strong { font-weight: 650; color: var(--ink); }
+.motivation-meter-label span { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.motivation progress { display: block; appearance: none; width: 100%; height: 8px; border: 0; border-radius: 10px; overflow: hidden; margin-top: 7px; background: var(--line); accent-color: var(--motivation-accent); }
+.motivation progress::-webkit-progress-bar { background: var(--line); border-radius: 10px; }
+.motivation progress::-webkit-progress-value { background: var(--motivation-accent); border-radius: 10px; }
+.motivation progress::-moz-progress-bar { background: var(--motivation-accent); border-radius: 10px; }
+.motivation-actions, .motivation-time-claims { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+.motivation .button { min-height: 44px; min-width: 44px; white-space: normal; overflow-wrap: anywhere; }
+.motivation-settings { display: grid; gap: 18px; }
+.motivation-form { margin-top: 18px; }
+.motivation-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px; }
+.motivation-field { min-width: 0; }
+.motivation-field input, .motivation-field select { min-height: 44px; width: 100%; min-width: 0; box-sizing: border-box; }
+.motivation-form > .button { margin-top: 18px; }
+.motivation-toggles { display: grid; gap: 10px; margin-top: 18px; }
+.motivation-toggle { display: flex; gap: 12px; align-items: center; min-height: 44px; cursor: pointer; padding: 10px 0; }
+.motivation-toggle > input { flex: 0 0 20px; width: 20px; height: 20px; margin: 0; accent-color: var(--motivation-accent); }
+.motivation-toggle > span { min-width: 0; }
+.motivation-toggle strong { display: block; font-size: .9rem; color: var(--ink); }
+.motivation-toggle small { display: block; margin-top: 4px; line-height: 1.55; color: var(--muted); }
+.motivation-quest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 14px; margin: 18px 0; }
+.motivation-quest { display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--line); border-radius: 16px; padding: 16px; min-width: 0; }
+.motivation-quest[data-complete="true"] { border-color: var(--motivation-accent); }
+.motivation-quest > .button { margin-top: auto; }
+.motivation-row-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.motivation-row-title > .icon { color: var(--motivation-accent); }
+.motivation-price { margin-inline-start: auto; font-size: .8rem; color: var(--muted); }
+.motivation-reward-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+.motivation-reward-row > div { flex: 1 1 200px; min-width: 0; }
+.motivation-reward-row > .button { flex: 0 1 auto; }
+.motivation-reward-row strong { color: var(--ink); }
+.motivation-shop-list { margin-top: 16px; }
+.motivation-shop > .field { margin-top: 18px; max-width: 400px; }
+.motivation-profile-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.motivation-badge { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 8px 12px; color: var(--motivation-accent); background: var(--motivation-soft); font-size: .8rem; font-weight: 650; }
+.motivation-badge .icon { width: 16px; height: 16px; }
+.motivation-badge-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 0 16px; margin-top: 10px; }
+.motivation-disclosure summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; color: var(--ink); font-weight: 650; }
+.motivation-disclosure summary::before { content: '＋'; padding-inline-end: 10px; color: var(--motivation-accent); }
+.motivation-disclosure details[open] summary::before { content: '−'; }
+.motivation-ledger { list-style: none; padding: 0; margin: 14px 0 0; }
+.motivation-ledger li { display: flex; align-items: baseline; flex-wrap: wrap; justify-content: space-between; gap: 8px; border-top: 1px solid var(--line); padding: 10px 0; font-size: .8rem; color: var(--muted); }
+.motivation-ledger strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+.motivation-disclosure > .button, .motivation-disable-confirm { margin-top: 14px; }
+.motivation :focus-visible { outline: 3px solid var(--motivation-accent); outline-offset: 3px; }
+.motivation[data-motion="off"] *, .motivation[data-motion="off"] *::before, .motivation[data-motion="off"] *::after { animation: none !important; transition: none !important; }
+html[data-reduce-motion="true"] .motivation *, html[data-reduce-motion="true"] .motivation *::before, html[data-reduce-motion="true"] .motivation *::after { animation: none !important; transition: none !important; }
+html[data-contrast="high"] .motivation { --motivation-accent: #000; --motivation-soft: #fff; }
+html[data-contrast="high"] .motivation :focus-visible { outline-color: #ffda00; }
+@media (max-width: 420px) {
+    .motivation-heading > .button, .motivation-starter > .button { width: 100%; }
+    .motivation-reward-row > .button { width: 100%; }
+    .motivation-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .motivation-metric { padding: 12px 10px; gap: 7px; }
+    .motivation-metric .icon { width: 18px; height: 18px; flex-basis: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .motivation *, .motivation *::before, .motivation *::after { animation: none !important; transition: none !important; }
+}

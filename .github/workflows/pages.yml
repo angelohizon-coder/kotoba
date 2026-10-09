@@ -1,0 +1,81 @@
+name: Publish Kotoba to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('kotoba-pr-{0}', github.event.pull_request.number) || 'github-pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Generate browser assets without npm
+        run: node tools/build-browser.mjs
+      - name: Check content, grading, storage, and course coverage
+        run: |
+          node scripts/check-core.mjs
+          node tools/check-browser-core.mjs
+          node tools/check-content.mjs
+          node tools/check-migration.mjs
+          node tools/check-learning.mjs
+          node tools/check-glossary.mjs
+          node tools/check-theme.mjs
+          node tools/check-full-mock.mjs
+          node tools/check-foundations.mjs
+          node tools/check-sounds.mjs
+          node tools/check-path.mjs
+          node tools/check-advanced.mjs
+          node tools/check-sm2.mjs
+          node tools/check-learnlab.mjs
+          node tools/check-motivation.mjs
+          node tools/check-speech-input.mjs
+          node tools/check-audio-features.mjs
+          node tools/check-flashcard-audio.mjs
+          node tools/check-local-features.mjs
+          node tools/check-repository.mjs
+          node tools/check-blueprint.mjs
+          node tools/check-local-data.mjs
+          node tools/check-path-recall.mjs
+          node tools/check-dataset-expansion.mjs
+      - name: Generate offline study library
+        run: node tools/build-offline.mjs
+      - name: Package public assets
+        run: node tools/package-site.mjs
+      - uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,13 @@
+/* The paw animates inside mascot.svg; this small tilt also works with external images. */
+.brand.is-waving .brand-mark {
+  animation: kotoba-brand-hello 1000ms ease-in-out 1;
+}
+@keyframes kotoba-brand-hello {
+  0%, 100% { transform: var(--kotoba-brand-pose, rotate(-5deg)); }
+  22% { transform: var(--kotoba-brand-pose, rotate(-5deg)) rotate(5deg); }
+  45% { transform: var(--kotoba-brand-pose, rotate(-5deg)) rotate(-3deg); }
+  68% { transform: var(--kotoba-brand-pose, rotate(-5deg)) rotate(2deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand.is-waving .brand-mark { animation: none !important; }
+}

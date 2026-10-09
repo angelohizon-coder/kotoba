@@ -1,0 +1,113 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Kotoba future progress API",
+    "version": "0.1.0-prepared",
+    "description": "Prepared contract only. No HTTP listener, authentication provider, remote client or PostgreSQL connection is active. The static application continues to save canonical JSON locally."
+  },
+  "servers": [],
+  "security": [{ "sessionCookie": [] }],
+  "paths": {
+    "/v1/progress": {
+      "get": {
+        "operationId": "readProgress",
+        "summary": "Read the authenticated learner's canonical snapshot",
+        "description": "Ownership comes only from trusted authentication context. A new learner receives initialProgress() at revision zero. Future HTTP middleware must authenticate and emit Cache-Control: no-store.",
+        "responses": {
+          "200": { "description": "Canonical progress and current revision", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Snapshot" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "503": { "description": "Repository unavailable; preserve local work", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HttpError" } } } }
+        }
+      },
+      "put": {
+        "operationId": "commitProgress",
+        "summary": "Compare and replace the authenticated learner's snapshot",
+        "description": "A matching successful mutation receipt is replayed before comparing revisions. Reusing the ID with different canonical progress or expected revision is invalid. The service bounds serialized request UTF-8 bytes to 2,000,000; a future HTTP adapter must enforce a stream limit before parsing too. Future middleware must verify authentication, CSRF and Origin; it is not implemented by the framework-neutral controllers.",
+        "parameters": [{ "name": "X-CSRF-Token", "in": "header", "required": true, "description": "Future HTTP adapter must validate a token bound to the authenticated cookie session.", "schema": { "type": "string", "minLength": 1 } }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CommitRequest" } } } },
+        "responses": {
+          "200": { "description": "Saved once, or the original successful receipt replayed", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Committed" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "description": "Future HTTP authentication middleware rejected the CSRF token or request origin; enforcement is not present in the framework-neutral controller", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HttpError" } } } },
+          "409": { "description": "Revision conflict; keep both versions for explicit resolution", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Conflict" } } } },
+          "422": { "description": "Invalid request, oversized serialized payload, canonical progress failure or changed mutation-ID payload", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Invalid" } } } },
+          "503": { "description": "Repository unavailable; retain the pending mutation and local data", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Unavailable" } } } }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionCookie": { "type": "apiKey", "in": "cookie", "name": "kotoba_session", "description": "Future verified HTTPS session cookie. The HTTP host must set HttpOnly, Secure and a deliberate SameSite policy and map the session to a stable internal UUIDv4. No authentication provider is connected." }
+    },
+    "responses": {
+      "Unauthorized": { "description": "Trusted authentication context is absent or invalid", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HttpError" } } } }
+    },
+    "schemas": {
+      "UuidV4": { "type": "string", "format": "uuid", "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$" },
+      "Revision": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+      "IsoUtc": { "type": "string", "format": "date-time", "description": "Canonical ISO UTC milliseconds from 1970 up to, but excluding, 2200; enforced by shared validation." },
+      "Id": { "type": "string", "minLength": 1, "maxLength": 200 },
+      "Ids": { "type": "array", "uniqueItems": true, "maxItems": 100000, "items": { "$ref": "#/components/schemas/Id" } },
+      "CommitRequest": {
+        "type": "object", "required": ["expectedRevision", "mutationId", "progress"],
+        "description": "The full envelope must serialize to at most 2,000,000 UTF-8 bytes. Extra metadata has no ownership or privilege effect; canonical progress validation controls stored data.",
+        "x-max-serialized-utf8-bytes": 2000000,
+        "properties": { "expectedRevision": { "$ref": "#/components/schemas/Revision" }, "mutationId": { "$ref": "#/components/schemas/UuidV4" }, "progress": { "$ref": "#/components/schemas/Progress" } },
+        "additionalProperties": true
+      },
+      "Snapshot": { "type": "object", "required": ["progress", "revision"], "properties": { "progress": { "$ref": "#/components/schemas/Progress" }, "revision": { "$ref": "#/components/schemas/Revision" } }, "additionalProperties": false },
+      "Committed": { "type": "object", "required": ["status", "snapshot", "replayed"], "properties": { "status": { "const": "committed" }, "snapshot": { "$ref": "#/components/schemas/Snapshot" }, "replayed": { "type": "boolean" } }, "additionalProperties": false },
+      "Conflict": { "type": "object", "required": ["status", "snapshot"], "properties": { "status": { "const": "conflict" }, "snapshot": { "$ref": "#/components/schemas/Snapshot" } }, "additionalProperties": false },
+      "Invalid": { "type": "object", "required": ["status", "message"], "properties": { "status": { "const": "invalid" }, "message": { "type": "string" } }, "additionalProperties": false },
+      "Unavailable": { "type": "object", "required": ["status", "message"], "properties": { "status": { "const": "unavailable" }, "message": { "type": "string" } }, "additionalProperties": false },
+      "HttpError": { "type": "object", "required": ["error", "message"], "properties": { "error": { "const": true }, "message": { "type": "string" } }, "additionalProperties": false },
+      "Progress": {
+        "type": "object", "required": ["schemaVersion", "contentVersion", "settings", "bookmarks", "attempts", "reviews", "studyEvents", "activeAttemptId"],
+        "description": "Canonical snapshot from src/lib/storage.ts. Supported older content releases migrate to the installed release. IDs must reference installed course content; answers, clocks, mastery and optional feature histories must pass shared semantic validation. Optional features are supported only when that validator accepts them.",
+        "x-canonical-validator": "src/lib/storage.ts#validateProgress",
+        "properties": {
+          "schemaVersion": { "const": 1 }, "contentVersion": { "enum": ["2026.10.1", "2026.10.2", "2026.10.3", "2026.10.4", "2026.10.5"] },
+          "settings": { "$ref": "#/components/schemas/Settings" }, "bookmarks": { "$ref": "#/components/schemas/Ids" }, "completedTasks": { "$ref": "#/components/schemas/Ids", "description": "May be absent in an old input; normalized snapshots always contain this array." },
+          "attempts": { "type": "array", "maxItems": 100000, "items": { "$ref": "#/components/schemas/Attempt" } },
+          "reviews": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/MistakeReview" } },
+          "studyEvents": { "type": "array", "maxItems": 100000, "items": { "$ref": "#/components/schemas/StudyEvent" } },
+          "activeAttemptId": { "type": ["string", "null"], "maxLength": 200 },
+          "srs": { "type": "object", "description": "Optional map keyed vocabulary:<ID>, kanji:<ID> or question:<ID>. Absence stays absent in older local saves.", "additionalProperties": { "$ref": "#/components/schemas/SrsRecord" } }
+        },
+        "additionalProperties": true
+      },
+      "Settings": {
+        "type": "object", "required": ["furigana", "dailyGoal", "examDate"],
+        "properties": {
+          "furigana": { "type": "boolean" }, "dailyGoal": { "type": "integer", "minimum": 1, "maximum": 1000 }, "examDate": { "type": "string", "description": "Empty or a real YYYY-MM-DD calendar date." },
+          "theme": { "enum": ["light", "dark"] }, "soundEffects": { "type": "boolean" }, "studyLevel": { "enum": ["n5", "n4", "n3", "n2", "n1", "all"] }, "pathResume": { "type": ["string", "null"], "description": "Known learning-path lesson ID or null." },
+          "dashboardWidgets": { "type": "array", "uniqueItems": true, "items": { "enum": ["path", "goal", "review", "balance", "habit", "activity", "library", "topics", "references", "foundations"] } },
+          "speechStyle": { "enum": ["natural", "bright", "calm", "deep"] }, "speechVoice": { "type": "string", "maxLength": 300 }
+        }, "additionalProperties": true
+      },
+      "Attempt": {
+        "type": "object", "required": ["id", "type", "status", "questionOrder", "optionOrders", "answers", "checkedIds", "excludedIds", "createdAt", "deadline", "isRetry", "listeningAccess"],
+        "properties": {
+          "id": { "$ref": "#/components/schemas/Id" }, "type": { "enum": ["practice", "mock", "reading", "listening", "review"] }, "status": { "enum": ["ready", "in-progress", "submitted", "reviewed"] },
+          "questionOrder": { "$ref": "#/components/schemas/Ids" }, "optionOrders": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/Ids" } }, "answers": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/Id" } },
+          "checkedIds": { "$ref": "#/components/schemas/Ids" }, "excludedIds": { "$ref": "#/components/schemas/Ids" }, "createdAt": { "$ref": "#/components/schemas/IsoUtc" }, "deadline": { "type": ["number", "null"] }, "submittedAt": { "$ref": "#/components/schemas/IsoUtc" }, "isRetry": { "type": "boolean" }, "listeningAccess": { "enum": ["audio", "script", null] },
+          "mock": { "type": "object", "description": "Full-mock level, currentSection and canonical timed sections; semantic partition/clock checks are performed by validateProgress." }
+        }, "additionalProperties": true
+      },
+      "MistakeReview": {
+        "type": "object", "required": ["questionId", "lastAnswerId", "firstMissedAt", "lastMissedAt", "dueAt", "streak", "mastered"],
+        "properties": { "questionId": { "$ref": "#/components/schemas/Id" }, "lastAnswerId": { "type": ["string", "null"] }, "firstMissedAt": { "$ref": "#/components/schemas/IsoUtc" }, "lastMissedAt": { "$ref": "#/components/schemas/IsoUtc" }, "lastReviewedAt": { "$ref": "#/components/schemas/IsoUtc" }, "dueAt": { "$ref": "#/components/schemas/IsoUtc" }, "streak": { "type": "integer", "minimum": 0, "maximum": 3 }, "mastered": { "type": "boolean", "description": "Must equal streak === 3 under legacy assessed review rules; distinct from SRS self-ratings." } },
+        "additionalProperties": false
+      },
+      "StudyEvent": { "type": "object", "required": ["id", "at", "type", "contentId"], "properties": { "id": { "$ref": "#/components/schemas/Id" }, "at": { "$ref": "#/components/schemas/IsoUtc" }, "type": { "enum": ["vocabulary", "grammar", "kanji"] }, "contentId": { "$ref": "#/components/schemas/Id" } }, "additionalProperties": false },
+      "SrsRecord": {
+        "type": "object", "required": ["algorithm", "type", "id", "repetitions", "intervalDays", "easinessFactor", "nextReviewAt", "lastReviewedAt", "events"],
+        "description": "State must exactly match replay of explicit events. The map key and canonical target must agree. Quiz scoring and completion marks are separate.",
+        "properties": { "algorithm": { "const": "sm2-ef-first-v1" }, "type": { "enum": ["vocabulary", "kanji", "question"] }, "id": { "type": "string", "minLength": 1, "maxLength": 180 }, "repetitions": { "type": "integer", "minimum": 0 }, "intervalDays": { "type": "integer", "minimum": 1 }, "easinessFactor": { "type": "number", "minimum": 1.3 }, "nextReviewAt": { "$ref": "#/components/schemas/IsoUtc" }, "lastReviewedAt": { "$ref": "#/components/schemas/IsoUtc" }, "maxIntervalDays": { "const": 365 }, "events": { "type": "array", "minItems": 1, "maxItems": 100000, "items": { "$ref": "#/components/schemas/SrsEvent" } } },
+        "additionalProperties": false
+      },
+      "SrsEvent": { "type": "object", "required": ["eventId", "quality", "reviewedAt"], "properties": { "eventId": { "$ref": "#/components/schemas/Id" }, "quality": { "type": "integer", "minimum": 0, "maximum": 5 }, "reviewedAt": { "$ref": "#/components/schemas/IsoUtc" }, "previousNextReviewAt": { "$ref": "#/components/schemas/IsoUtc" }, "maxIntervalDays": { "const": 365 } }, "additionalProperties": false }
+    }
+  }
+}

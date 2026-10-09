@@ -1,0 +1,7 @@
+node_modules/
+artifacts/browser-profile-*/
+dist/
+_site/
+test-results/
+playwright-report/
+*.tsbuildinfo

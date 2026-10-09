@@ -1,0 +1,49 @@
+/* Inline dictionary help keeps context words readable without changing answers. */
+.word-help-note { margin: 14px 0 0; color: var(--muted, #687077); font-size: 0.75rem; line-height: 1.7; }
+.gloss-word {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+  text-align: inherit;
+  text-decoration: underline dotted #7b99a4;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  cursor: help;
+  transition: background-color .12s ease;
+}
+.gloss-word:hover,
+.gloss-word[aria-describedby] { background: #eaf7ff; text-decoration-color: #0a77a6; }
+.gloss-word:focus-visible { outline: 2px solid #0b86bd; outline-offset: 3px; background: #eaf7ff; }
+.gloss-tooltip {
+  position: fixed;
+  z-index: 70;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 20px));
+  padding: 12px 15px;
+  border: 1px solid #bfdce8;
+  border-radius: 12px;
+  background: #fff;
+  color: #33454e;
+  box-shadow: 0 5px 22px #1b415526;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  overscroll-behavior: contain;
+}
+.gloss-tooltip[hidden] { display: none; }
+.gloss-tooltip-reading { display: block; font-size: 0.9375rem; font-weight: 700; color: #116b8e; }
+.gloss-tooltip-meaning { display: block; margin-top: 3px; }
+@media (prefers-reduced-motion: reduce) { .gloss-word { transition: none; } }
+@media print {
+  .gloss-word { text-decoration: none; }
+  .gloss-tooltip { display: none !important; }
+}

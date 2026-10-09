@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#58cc02" />
+    <script>
+      // Apply the saved palette before styles paint; invalid or blocked storage uses light.
+      try {
+        const saved = JSON.parse(localStorage.getItem('kotoba-n3-progress') || 'null');
+        document.documentElement.dataset.theme = saved?.settings?.theme === 'dark' ? 'dark' : 'light';
+      } catch { document.documentElement.dataset.theme = 'light'; }
+    </script>
+    <meta name="description" content="Integrated JLPT N3–N1 Japanese learning paths, N5/N4 review, flashcards, listening practice, and full timed mocks. No npm needed. Progress saved on your device." />
+    <title>Kotoba — JLPT Japanese study and practice</title>
+    <link rel="icon" href="./web/mascot.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./web/styles.css" />
+    <link rel="stylesheet" href="./web/flashcards.css" />
+    <link rel="stylesheet" href="./web/glossary.css" />
+    <link rel="stylesheet" href="./web/dropdowns.css" />
+    <link rel="stylesheet" href="./web/design.css" />
+    <link rel="stylesheet" href="./web/dashboard.css" />
+    <link rel="stylesheet" href="./web/effects.css" />
+    <link rel="stylesheet" href="./web/celebrations.css" />
+    <link rel="stylesheet" href="./web/widgets.css" />
+    <link rel="stylesheet" href="./web/references.css" />
+    <link rel="stylesheet" href="./web/audio.css" />
+    <link rel="stylesheet" href="./web/srs.css" />
+    <link rel="stylesheet" href="./web/learnlab.css" />
+    <link rel="stylesheet" href="./web/motivation.css" />
+    <link rel="stylesheet" href="./web/preferences.css" />
+    <link rel="stylesheet" href="./web/speech-input.css" />
+    <link rel="stylesheet" href="./web/local-data.css" />
+    <link rel="stylesheet" href="./web/path-recall.css" />
+    <script defer src="./web/content.js"></script>
+    <script defer src="./web/engine.js"></script>
+    <script defer src="./web/storage.js"></script>
+    <script defer src="./web/sm2.js"></script>
+    <script defer src="./web/repository.js"></script>
+    <script defer src="./web/preference-model.js"></script>
+    <script defer src="./web/learnlab-model.js"></script>
+    <script defer src="./web/motivation-engine.js"></script>
+    <script defer src="./web/ui.js"></script>
+    <script defer src="./web/preferences.js"></script>
+    <script defer src="./web/offline.js"></script>
+    <script defer src="./web/dropdowns.js"></script>
+    <script defer src="./web/sounds.js"></script>
+    <script defer src="./web/audio.js"></script>
+    <script defer src="./web/flashcards.js"></script>
+    <script defer src="./web/references.js"></script>
+    <script defer src="./web/study.js"></script>
+    <script defer src="./web/glossary.js"></script>
+    <script defer src="./web/glossary-ui.js"></script>
+    <script defer src="./web/quiz.js"></script>
+    <script defer src="./web/path.js"></script>
+    <script defer src="./web/path-recall.js"></script>
+    <script defer src="./web/customize.js"></script>
+    <script defer src="./web/celebrations.js"></script>
+    <script defer src="./web/widgets.js"></script>
+    <script defer src="./web/dashboard.js"></script>
+    <script defer src="./web/sessions.js"></script>
+    <script defer src="./web/srs.js"></script>
+    <script defer src="./web/speech-input.js"></script>
+    <script defer src="./web/learnlab.js"></script>
+    <script defer src="./web/motivation.js"></script>
+    <script defer src="./web/local-data.js"></script>
+    <script defer src="./web/app.js"></script>
+  </head>
+  <body>
+    <div id="root"><p style="font-family:system-ui;padding:2rem">Opening your Japanese learning space…</p></div>
+    <noscript><p>Enable JavaScript to use Kotoba. All app files are included locally; no package installation is required.</p></noscript>
+  </body>
+</html>

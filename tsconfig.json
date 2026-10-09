@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "types": []
+  },
+  "include": [
+    "src/types.ts",
+    "src/content/index.ts",
+    "src/lib/engine.ts",
+    "src/lib/storage.ts",
+    "src/lib/progress-repository.ts"
+  ]
+}

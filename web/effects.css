@@ -1,0 +1,42 @@
+/* Small, finite effects keep movement out of long Japanese reading sessions. */
+.page-enter { animation: kotoba-page-in 210ms cubic-bezier(.2, .7, .25, 1) both; }
+.lesson-enter { animation: kotoba-lesson-in 180ms ease-out both; }
+.dropdown-menu { animation: kotoba-menu-in 150ms cubic-bezier(.2, .7, .25, 1) both; transform-origin: top center; }
+.dropdown-menu[data-direction='up'] { transform-origin: bottom center; }
+.modal { animation: kotoba-modal-in 180ms ease-out both; }
+.notice[role='status'] { animation: kotoba-feedback-in 160ms ease-out both; }
+.feedback.correct, .answer-feedback.correct { animation: kotoba-feedback-in 190ms ease-out both; }
+.feedback.incorrect, .answer-feedback.incorrect { animation: kotoba-feedback-in 190ms ease-out both; }
+.option.correct .option-letter, .task-completion.completed .task-completion-check { animation: kotoba-pop 220ms ease-out; }
+.widget-just-moved { animation: kotoba-widget-placed 650ms ease-out; }
+.dashboard-widget, .daily-lesson-node, .widget-order-item { transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+.nav-link, .bottom-tab, .segmented button, .theme-toggle, .icon-button, .bookmark-button, .lesson-card, .passage-card { transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease; }
+.button { transition: transform 120ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+.button:active:not(:disabled), .icon-button:active:not(:disabled), .theme-toggle:active:not(:disabled) { transform: translateY(2px); }
+.button:active:not(:disabled) { border-bottom-width: 5px; }
+.button.small:active:not(:disabled) { border-bottom-width: 4px; }
+.button.ghost:active:not(:disabled) { border-bottom-width: 2px; }
+.task-completion-check, .bookmark-button svg { transition: transform 160ms ease; }
+.bookmark-button[aria-pressed='true'] svg { transform: rotate(-5deg); }
+.progress-fill { transition: width 240ms ease-out; }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover:not(:disabled) { transform: translateY(-1px); }
+  .button:active:not(:disabled) { transform: translateY(2px); }
+  .path-node { transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease; }
+  .dashboard-widget:hover { border-color: var(--line-strong); }
+  .daily-lesson-node:hover { background: var(--surface-soft); border-color: var(--blue-line); }
+  .daily-lesson-node.selected:hover { background: var(--blue-soft); }
+}
+.page-enter:has(.is-reordering), .is-reordering .dashboard-widget, .is-reordering .widget-order-item { animation: none; transition: none; }
+@keyframes kotoba-page-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@keyframes kotoba-lesson-in { from { opacity: .6; transform: translateX(5px); } to { opacity: 1; transform: none; } }
+@keyframes kotoba-menu-in { from { opacity: 0; transform: scale(.98) translateY(-3px); } to { opacity: 1; transform: none; } }
+@keyframes kotoba-modal-in { from { opacity: 0; transform: scale(.98) translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes kotoba-feedback-in { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes kotoba-widget-placed { from { box-shadow: 0 0 0 4px var(--blue-soft),var(--shadow); } to { box-shadow: var(--shadow); } }
+@keyframes kotoba-pop { 0% { transform: scale(.88); } 60% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .page-enter, .lesson-enter, .dropdown-menu, .modal, .notice[role='status'], .feedback, .answer-feedback, .option.correct .option-letter, .task-completion.completed .task-completion-check, .widget-just-moved { animation: none !important; }
+  .nav-link, .bottom-tab, .segmented button, .theme-toggle, .icon-button, .bookmark-button, .lesson-card, .passage-card, .button, .task-completion-check, .bookmark-button svg, .progress-fill, .path-node, .dashboard-widget, .daily-lesson-node, .widget-order-item { transition: none !important; }
+  .button:hover:not(:disabled), .button:active:not(:disabled), .icon-button:active:not(:disabled), .theme-toggle:active:not(:disabled), .path-node:hover { transform: none; }
+}

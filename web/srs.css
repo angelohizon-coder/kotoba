@@ -1,0 +1,25 @@
+.srs-ratings { margin-top: 20px; min-width: 0; }
+.srs-rating-controls { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; padding: 0; border: 0; margin: 0; }
+.srs-rating-controls legend { grid-column: 1 / -1; margin-bottom: 12px; font-weight: 800; }
+.srs-rating { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 6px; min-height: 64px; }
+.srs-rating-number { color: var(--muted); font-size: 0.75rem; }
+.srs-rating-status, .srs-policy-note { color: var(--muted); font-size: 0.8125rem; line-height: 1.65; margin: 12px 0 0; }
+.srs-policy-note { font-size: 0.75rem; }
+.srs-rating-status:focus-visible { outline: 3px solid var(--focus, #58a700); outline-offset: 4px; border-radius: 6px; }
+.flashcard-srs-status-slot { display: grid; min-width: 0; }
+.flashcard-srs-status-slot > p { grid-area: 1 / 1; }
+.flashcard-srs-status-reserve { visibility: hidden; pointer-events: none; }
+.srs-review { min-width: 0; }
+.srs-recall-card { max-width: 780px; margin: 0 auto; min-width: 0; }
+.srs-recall-front, .srs-recall-answer { padding: 20px 0; }
+.srs-recall-front { text-align: center; }
+.srs-recall-word { font-size: clamp(2.25rem, 7vw, 3.75rem); line-height: 1.5; overflow-wrap: anywhere; }
+.srs-recall-meaning { font-size: 1.25rem; font-weight: 750; }
+.srs-recall-answer { border-top: 2px solid var(--border); }
+.srs-recall-answer[hidden] { display: none; }
+.srs-linked-words { display: grid; gap: 10px; padding-left: 22px; }
+.srs-empty, .srs-queue-status { line-height: 1.7; }
+@media (max-width: 600px) {
+  .srs-rating-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .srs-rating { min-height: 60px; }
+}

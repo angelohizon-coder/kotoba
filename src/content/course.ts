@@ -1,0 +1,42 @@
+import type { Topic, QuestionType } from '../types';
+
+// An explicit study map, not an official item-by-item JLPT syllabus.
+export const topics: Topic[] = [
+  {id:'daily',title:'Daily life & routines',description:'Habits, chores, and everyday decisions.'},
+  {id:'people',title:'People & relationships',description:'Family, friendship, and social interactions.'},
+  {id:'home',title:'Home & housing',description:'Rooms, moving, repairs, and shared spaces.'},
+  {id:'shopping',title:'Shopping & money',description:'Products, prices, payment, and returns.'},
+  {id:'food',title:'Food & cooking',description:'Meals, ingredients, restaurants, and recipes.'},
+  {id:'travel',title:'Travel & accommodation',description:'Trips, bookings, hotels, and sightseeing.'},
+  {id:'transport',title:'Transport & directions',description:'Routes, tickets, stations, and delays.'},
+  {id:'work',title:'Work & business',description:'Meetings, colleagues, tasks, and workplace messages.'},
+  {id:'education',title:'School & learning',description:'Classes, study methods, assignments, and exams.'},
+  {id:'health',title:'Health & wellbeing',description:'Symptoms, appointments, exercise, and advice.'},
+  {id:'nature',title:'Weather & environment',description:'Seasons, forecasts, nature, and sustainability.'},
+  {id:'technology',title:'Technology & media',description:'Devices, online services, information, and news.'},
+  {id:'community',title:'Community & public life',description:'Local events, libraries, public facilities, and rules.'},
+  {id:'culture',title:'Culture & leisure',description:'Hobbies, entertainment, sports, and invitations.'},
+  {id:'feelings',title:'Feelings & opinions',description:'Reactions, preferences, expectations, and viewpoints.'},
+  {id:'communication',title:'Communication & manners',description:'Requests, explanations, reported speech, and politeness.'},
+  {id:'time',title:'Time & plans',description:'Schedules, deadlines, sequence, and changing arrangements.'},
+  {id:'services',title:'Services & procedures',description:'Applications, reception desks, documents, and assistance.'},
+];
+export const questionTypes: {id: QuestionType; title: string; skill: string; note?: string}[] = [
+  {id:'kanji-reading',title:'Kanji reading',skill:'kanji'},
+  {id:'orthography',title:'Orthography',skill:'vocabulary'},
+  {id:'vocabulary-context',title:'Vocabulary in context',skill:'vocabulary'},
+  {id:'paraphrase',title:'Paraphrases',skill:'vocabulary'},
+  {id:'usage',title:'Word usage',skill:'vocabulary'},
+  {id:'grammar-form',title:'Grammar forms',skill:'grammar'},
+  {id:'grammar-order',title:'Sentence composition',skill:'grammar'},
+  {id:'text-grammar',title:'Text grammar',skill:'grammar'},
+  {id:'reading-short',title:'Short passages',skill:'reading'},
+  {id:'reading-medium',title:'Mid-size passages',skill:'reading'},
+  {id:'reading-long',title:'Long passages',skill:'reading'},
+  {id:'reading-information',title:'Information retrieval',skill:'reading'},
+  {id:'listening-task',title:'Task comprehension',skill:'listening'},
+  {id:'listening-points',title:'Key points',skill:'listening'},
+  {id:'listening-outline',title:'General outline',skill:'listening'},
+  {id:'listening-expression',title:'Verbal expressions',skill:'listening',note:'Adapted written situations; does not reproduce official picture-based items.'},
+  {id:'listening-response',title:'Quick response',skill:'listening'},
+];

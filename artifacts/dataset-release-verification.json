@@ -1,0 +1,13 @@
+{
+  "contentVersion": "2026.10.5",
+  "verifiedOn": "2026-10-09",
+  "counts": { "vocabulary": 1089, "kanji": 904, "grammar": 252, "readings": 72, "listening": 120, "questions": 2776 },
+  "added": { "vocabulary": 452, "kanji": 240, "grammar": 50, "readings": 20, "listening": 30, "questions": 1075 },
+  "native": { "suites": 24, "groups": 385, "functionalAndContentGroups": 379, "provenanceGroups": 6, "log": "artifacts/dataset-native-verification.json" },
+  "types": { "version": "6.0.3", "strictSourceDiagnostics": 0 },
+  "browserSyntaxScripts": 33,
+  "chrome": { "fullJourneys": 67, "focusedDatasetJourneys": 5, "focusedWidgetJourneys": 4, "base": "http://127.0.0.1:5173/_site/", "scope": "All nine routes, actual new content controls, source links, flashcard geometry, saved answers, migration/import/resume, mouse/touch/keyboard widgets, direct-file loading, relative subpath, mobile layouts, offline reload/save/archive and scoped opt-out." },
+  "publicArtifact": { "directory": "_site/", "offlineAssets": 54, "offlineRevision": "c1ffd1de55ce13e7", "npmInstallRequired": false, "remoteDeployed": false },
+  "inspectedScreenshots": [ "artifacts/dataset-sources-1440.png", "artifacts/dataset-sources-360.png", "artifacts/dataset-path-n5-360.png" ],
+  "limits": [ "No complete textbook, official lexical syllabus or exact chapter/page alignment claim.", "Editorial passes and structural checks do not replace independent expert linguistic review.", "Controlled device-speech tests do not establish installed Japanese voice availability or native-speaker recordings.", "No database or external service was connected or deployed." ]
+}

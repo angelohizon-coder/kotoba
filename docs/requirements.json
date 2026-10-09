@@ -1,0 +1,2045 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-09",
+  "title": "Kotoba staged audit of the 100 JLPT learning requirements",
+  "sourceAttachment": "254c077c-0d17-4656-9253-c1fc2aec3bd7/Pasted text.txt",
+  "scope": "Repository backlog, not a claim that every requested feature was implemented in this change. Requirements apply to the active static application; the retained React prototype is inactive.",
+  "statusDefinitions": {
+    "existing": "The requested behavior is supported by the current source and cited checks, subject to explicitly stated scope limits.",
+    "implemented": "Completed in the current staged change, including this audit. Final execution of cited checks is reported separately.",
+    "optional": "An explicitly optional feature has not been selected or implemented; its absence does not block the current core flow.",
+    "deferred": "A material part is missing. Existing partial behavior is recorded without treating the entire requirement as complete.",
+    "blocked": "The remaining work depends on unavailable source material or assets; independent work can continue."
+  },
+  "auditBasis": {
+    "runtime": "index.html and local classic scripts/styles/assets in web/; no npm, server, account or paid API is required for core browser use.",
+    "contentVersion": "2026.10.4",
+    "contentCounts": {
+      "vocabulary": 637,
+      "kanji": 664,
+      "grammar": 202,
+      "readings": 52,
+      "listeningScripts": 90,
+      "questions": 1701
+    },
+    "advancedQuestionCounts": {
+      "n2": 191,
+      "n1": 188
+    },
+    "instructionFiles": "No AGENTS.md was found inside the project/workspace. The inspected global C:/Users/Angelo/.codex/AGENTS.md is empty.",
+    "evidenceConvention": "Paths are relative to the repository. Tests cited below describe concrete checked behavior; this JSON is a source audit and does not substitute for the final test execution report. Legacy src/lib/*.test.ts fixtures are distinguished from the npm-free executable check suites.",
+    "referenceLimits": [
+      "Thirty N3/N2/N1 publisher volumes have verified edition, ISBN, catalog topics and representative app links. Full textbooks were not available; exact chapter, page and daily correspondences remain unverified.",
+      "The revised So-matome pacing description and Shin Kanzen skill descriptions inform an original app sequence. Completing the app does not certify complete textbook or JLPT syllabus coverage.",
+      "Listening currently uses original scripts and one device-dependent Japanese text-to-speech voice. No varied human-speaker recording library is shipped.",
+      "Mock questions are original authored pools. Results are raw accuracy, not historical papers, JLPT scaled scores, certification or pass predictions.",
+      "A successful local package/check is not evidence that this repository has already been published to GitHub Pages."
+    ]
+  },
+  "totals": {
+    "existing": 46,
+    "implemented": 4,
+    "optional": 5,
+    "deferred": 44,
+    "blocked": 1
+  },
+  "recommendedStages": [
+    {
+      "stage": 1,
+      "name": "Close the remaining core-loop gaps before expanding optional features",
+      "requirementIds": [
+        13,
+        14,
+        15,
+        19,
+        25,
+        31,
+        32,
+        35,
+        38,
+        39,
+        43,
+        44,
+        54,
+        56,
+        57,
+        58,
+        63,
+        64,
+        65,
+        86,
+        88,
+        92,
+        99
+      ],
+      "nextGroups": [
+        "Generate a per-item curriculum coverage report and explicit provisional reference mappings; request actual chapter/sample evidence only when a precise book mapping is needed.",
+        "Add assistance events and concept/skill review records with migrations before changing mastery or adaptive scheduling.",
+        "Connect searchable mistakes to relearning lessons and fresh variant prompts; validate answer announcements and richer keyboard/audio controls.",
+        "Add timezone-boundary checks and recoverable pre-import backups. Complete a measured contrast/control-size and assistive-technology audit."
+      ]
+    },
+    {
+      "stage": 2,
+      "name": "Personalization, recall quality and honest feedback",
+      "requirementIds": [
+        18,
+        21,
+        22,
+        24,
+        27,
+        28,
+        29,
+        34,
+        40,
+        55,
+        59,
+        60,
+        66,
+        69,
+        72,
+        73,
+        79,
+        81,
+        85,
+        90,
+        97
+      ],
+      "nextGroups": [
+        "Remember session preferences and offer a compact default start, configurable study budgets and separate new/review caps with workload estimates.",
+        "Add conservative typed-reading validation, staged hints, explicit recall attempts and independently configurable encouragement/motion/sounds.",
+        "Add safe private notes, concept-based session summaries, confidence-aware skill history and a small returning-learner restart.",
+        "Group navigation, provide text-size controls and measure initial payload performance before optimizing downloads or splitting content.",
+        "If selected, add a skippable N4-to-N3 readiness check with inspectable bridge recommendations."
+      ]
+    },
+    {
+      "stage": 3,
+      "name": "Optional offline delivery and motivation",
+      "requirementIds": [
+        75,
+        76,
+        78,
+        94,
+        95
+      ],
+      "nextGroups": [
+        "Only after the core flow is verified, add a base-path-scoped manifest/service worker and opt-in per-unit downloads with sizes and removal controls.",
+        "If selected, define idempotent XP, explicit badge criteria and personal weekly challenges; preserve unrestricted learning and reduced-motion behavior."
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": 1,
+      "summary": "Inspect repository instructions, content and storage; preserve existing work.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "The audit inspects the active static runtime, typed content, engine, storage and deployment files. This change adds documentation only.",
+      "evidence": [
+        "README.md",
+        "src/types.ts",
+        "src/content/index.ts",
+        "src/lib/storage.ts",
+        "docs/requirements.json"
+      ],
+      "tests": [],
+      "gaps": []
+    },
+    {
+      "id": 2,
+      "summary": "Keep core learning on free static GitHub Pages.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "The public package contains static HTML and local web assets; GitHub Actions can deploy it to github.io without a runtime backend.",
+      "evidence": [
+        "index.html",
+        "tools/package-site.mjs",
+        ".github/workflows/pages.yml",
+        "README.md"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "The site is deployment-ready; this audit does not assert that publication has occurred."
+    },
+    {
+      "id": 3,
+      "summary": "Require no paid API, account, subscription or credit card for learning.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Learning runs from local assets and browser storage, with browser speech and synthesized optional sound cues.",
+      "evidence": [
+        "index.html",
+        "web/app.js",
+        "web/audio.js",
+        "web/sounds.js",
+        "README.md"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Publishing uses the owner's GitHub account; learners do not need an account."
+    },
+    {
+      "id": 4,
+      "summary": "Support root and repository-subpath Pages assets and routes.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Relative local assets, hash navigation and a packaged repository-aware 404 link support both Pages layouts.",
+      "evidence": [
+        "index.html",
+        "404.html",
+        "tools/package-site.mjs",
+        "web/app.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Browser checks cover packaged subpath routes, refreshes and direct-file loading; GitHub hosting itself is external."
+    },
+    {
+      "id": 5,
+      "summary": "Default to local learning without undefined cloud or social hosting.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Progress stays in browser-local storage and moves only through learner-initiated JSON backups. There is no cloud sync, social account or leaderboard.",
+      "evidence": [
+        "src/lib/storage.ts",
+        "web/app.js",
+        "README.md"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 6,
+      "summary": "Use stable IDs for learning content and progress links.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Canonical IDs connect units, lessons, vocabulary, kanji, grammar, passages, listening scripts, questions, attempts and study events. Additive releases preserve legacy IDs.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/learning-path.ts",
+        "src/lib/engine.ts",
+        "src/lib/storage.ts"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-migration.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Future reordering of generated lesson allocations must preserve their meaning or include an explicit migration."
+    },
+    {
+      "id": 7,
+      "summary": "Share typed content contracts for objectives, prerequisites, answers, audio and sources.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Typed content and path/reference contracts cover skills, objectives, prerequisites, canonical accepted option IDs, per-option explanations, audio URLs and related content/source IDs.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/learning-path.ts",
+        "src/content/reference-map.ts"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Accepted answers currently mean multiple-choice keys; typed-answer variants require the extension described in #29."
+    },
+    {
+      "id": 8,
+      "summary": "Version and migrate saved data without losing progress.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Schema 1 and content version 2026.10.4 validate additive legacy releases and normalize new settings while preserving attempts, reviews and IDs. Unknown or corrupt versions are retained and reported.",
+      "evidence": [
+        "src/lib/storage.ts",
+        "src/content/index.ts"
+      ],
+      "tests": [
+        "tools/check-migration.mjs",
+        "tools/check-browser-core.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 9,
+      "summary": "Connect the guided path to all existing study and assessment views.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Integrated N3–N1 lessons link words/kanji, grammar, reading, audio, mixed retrieval, mistake review and full-mock preparation; direct study tools remain accessible.",
+      "evidence": [
+        "web/path.js",
+        "web/app.js",
+        "web/dashboard.js"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 10,
+      "summary": "Audit and implement coherent verified stages rather than all 100 at once.",
+      "status": "implemented",
+      "stage": 1,
+      "existingBehavior": "This file records every requirement, partial behavior, evidence and remaining work. The current small stage adds a guided start and UI interaction refinements while preserving the core.",
+      "evidence": [
+        "docs/requirements.json",
+        "web/path.js",
+        "web/customize.js"
+      ],
+      "tests": [
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 11,
+      "summary": "Make the default home path actionable with prominent Start/Continue.",
+      "status": "implemented",
+      "stage": 1,
+      "existingBehavior": "The default home includes Learning path. Its primary path-start button opens the selected saved or next uncompleted lesson, scrolls to actual study content and saves pathResume without marking completion.",
+      "evidence": [
+        "web/path.js",
+        "web/dashboard.js",
+        "src/lib/storage.ts"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Learners may deliberately hide or reorder dashboard widgets. N5/N4 remain foundation-review routes."
+    },
+    {
+      "id": 12,
+      "summary": "Use verified So-matome pacing and Shin Kanzen skill guidance.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "The reference map records revised So-matome daily/weekly pacing and verified Shin Kanzen skill topics; the original app uses six study lessons followed by cumulative review.",
+      "evidence": [
+        "REFERENCES.md",
+        "src/content/reference-map.ts",
+        "src/content/learning-path.ts",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/check-path.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "App unit counts are content-sized and are not invented matches to textbook weeks or chapters."
+    },
+    {
+      "id": 13,
+      "summary": "Attach verified reference metadata and provisional mappings to each unit.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Thirty volume records include series, edition, ISBN, topics, sources, representative app IDs and gaps; lessons link relevant volume IDs and expose these records.",
+      "evidence": [
+        "src/content/reference-map.ts",
+        "src/content/learning-path.ts",
+        "web/path.js",
+        "REFERENCES.md"
+      ],
+      "tests": [
+        "tools/check-path.mjs"
+      ],
+      "gaps": [
+        "Mappings are broad level/skill links, not verified per-unit chapter/topic correspondences.",
+        "Full-book chapter/day/page material is unavailable; some publisher previews were inaccessible."
+      ],
+      "nextAction": "Add explicit per-unit mapping coverage/provisional metadata using accessible source evidence; retain exact correspondence gaps until actual material is available."
+    },
+    {
+      "id": 14,
+      "summary": "Audit every N3 item and report unmapped content, duplicates and missing audio.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Path checks cover every authored N3 word and grammar point; lessons link all skills and final revision includes the full level question pool. Content checks reject duplicate IDs/words and broken links.",
+      "evidence": [
+        "src/content/learning-path.ts",
+        "tools/check-path.mjs",
+        "tools/check-content.mjs",
+        "README.md"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-content.mjs"
+      ],
+      "gaps": [
+        "No per-item audit artifact classifies all N3 kanji, passages, audio and questions as mapped/unmapped with concept-duplicate reasons.",
+        "Structural word/ID uniqueness does not establish semantic concept uniqueness or exhaustive curriculum coverage."
+      ],
+      "nextAction": "Generate an item-level coverage report including representative reference coverage, duplicate concepts and synthesized-versus-recorded audio availability."
+    },
+    {
+      "id": 15,
+      "summary": "Order the course by evidenced objectives and prerequisites.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "The path orders authored grammar families with acyclic earlier-unit prerequisites; eighteen topic tags are browsing filters. Publisher objectives and original app groupings are explicitly separated.",
+      "evidence": [
+        "src/content/learning-path.ts",
+        "src/content/reference-map.ts",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/check-path.mjs"
+      ],
+      "gaps": [
+        "The precise item-to-item prerequisite order is authored guidance, not a fully verified prerequisite map from the reference curricula."
+      ],
+      "nextAction": "Record concrete prerequisite concept IDs and their teaching rationale; verify available reference objectives without fabricating chapter matches."
+    },
+    {
+      "id": 16,
+      "summary": "Give units practical titles, objectives, prerequisites and activity lists.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Units and lessons expose descriptive grammar-family titles, objectives, prerequisite summaries and actual linked vocabulary, grammar, passage, listening and question activities.",
+      "evidence": [
+        "src/content/learning-path.ts",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 17,
+      "summary": "Interleave all skills and mixed retrieval in each learning unit.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Daily lessons combine at most seven words and two grammar points, linked kanji, context sentences, reading, playable listening and current/earlier mixed practice.",
+      "evidence": [
+        "src/content/learning-path.ts",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Longer passages develop related skills but do not claim to contain every daily target."
+    },
+    {
+      "id": 18,
+      "summary": "Offer a skippable N4-to-N3 readiness check with inspectable bridge recommendations.",
+      "status": "optional",
+      "stage": 2,
+      "existingBehavior": "N5/N4 foundation lessons and level-specific practice are available directly.",
+      "evidence": [
+        "src/content/foundation-review.ts",
+        "web/dashboard.js",
+        "web/sessions.js"
+      ],
+      "tests": [
+        "tools/check-foundations.mjs"
+      ],
+      "gaps": [
+        "No readiness assessment scores prerequisite skills or recommends specific bridge lessons."
+      ],
+      "nextAction": "If selected, author a short optional diagnostic with transparent skill-based recommendations and a Skip control."
+    },
+    {
+      "id": 19,
+      "summary": "Distinguish not-started, in-progress, completed and demonstrated mastery.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Manual lesson checkmarks, assessed accuracy and three-due-retry question mastery are separate. Page views do not grant completion/mastery; active attempts are saved distinctly.",
+      "evidence": [
+        "web/path.js",
+        "web/app.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/check-learning.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": [
+        "The path does not explicitly render all four lifecycle states for every unit/lesson; selecting a lesson is resume state rather than recorded learning progress."
+      ],
+      "nextAction": "Derive explicit lesson lifecycle labels from meaningful study/assessment evidence while preserving manual completion separately."
+    },
+    {
+      "id": 20,
+      "summary": "Add cumulative review, final revision and honest original N3 mocks.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Six-lesson groups end with cumulative checkpoints, followed by final revision and original full mock preparation. Official section durations and task categories inform practice; results show raw counts only.",
+      "evidence": [
+        "src/content/learning-path.ts",
+        "src/lib/engine.ts",
+        "web/sessions.js",
+        "web/quiz.js",
+        "REFERENCES.md"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-full-mock.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Authored question targets and synthesized/picture-free listening adaptations are not exact historical test reproduction."
+    },
+    {
+      "id": 21,
+      "summary": "Offer adjustable estimated daily study time budgets.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Daily lessons use small content portions and learner-controlled pacing; practice question counts are adjustable.",
+      "evidence": [
+        "src/content/learning-path.ts",
+        "web/path.js",
+        "web/sessions.js"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [
+        "No five/ten/twenty-minute budget setting or measured/estimated lesson duration is shown."
+      ],
+      "nextAction": "Add a saved budget preference and clearly estimated workloads without making elapsed idle time evidence of study."
+    },
+    {
+      "id": 22,
+      "summary": "Provide one-click practice with saved preferences and disclosed advanced filters.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Practice defaults to five mixed questions with weak-point priority; a single Start practice button launches the configured session. The learning level persists.",
+      "evidence": [
+        "web/sessions.js",
+        "web/app.js",
+        "src/types.ts"
+      ],
+      "tests": [
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [
+        "Skill/topic/format/count/weak-point settings are transient and visible rather than saved behind Customize session."
+      ],
+      "nextAction": "Persist validated session preferences and add a compact default start with an accessible customization disclosure."
+    },
+    {
+      "id": 23,
+      "summary": "Introduce new concepts with explanations and examples before dependent practice.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Integrated lessons present word context, grammar explanations/examples and reading context before mixed practice. Standalone grammar also offers study before Practice this pattern.",
+      "evidence": [
+        "web/path.js",
+        "web/study.js",
+        "src/content/learning-path.ts"
+      ],
+      "tests": [
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Experienced learners retain direct access to practice; prerequisite completion is suggested rather than enforced."
+    },
+    {
+      "id": 24,
+      "summary": "Teach contextual vocabulary and useful collocations.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Words include reading, meaning, word class, original natural example and translation; flashcards and the path preserve this context.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/index.ts",
+        "web/study.js",
+        "web/flashcards.js"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-advanced.mjs"
+      ],
+      "gaps": [
+        "Collocations are implicit in examples; there is no explicit reviewed collocation teaching field or coverage audit for each word."
+      ],
+      "nextAction": "Add selected useful collocations with original examples and verify their sense/register instead of treating every co-occurrence as a collocation."
+    },
+    {
+      "id": 25,
+      "summary": "Teach kanji through vocabulary plus accurate components and original mnemonics.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Kanji connect to real words, readings and meanings; shared characters retain canonical IDs across levels.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/index.ts",
+        "web/study.js",
+        "web/flashcards.js"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-advanced.mjs"
+      ],
+      "gaps": [
+        "Component explanations and original optional mnemonics are absent."
+      ],
+      "nextAction": "Add reviewed component guidance, label memory aids as original mnemonics and keep historical etymology separately sourced."
+    },
+    {
+      "id": 26,
+      "summary": "Adjust learning furigana without leaking recall answers.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Saved furigana controls apply to revealed study cards and flashcard answers. Quiz questions/options use Japanese text without automatic reading ruby; target/evidence glossary clues stay protected until checked.",
+      "evidence": [
+        "web/study.js",
+        "web/flashcards.js",
+        "web/quiz.js",
+        "web/glossary.js",
+        "src/lib/storage.ts"
+      ],
+      "tests": [
+        "tools/check-glossary.mjs",
+        "tools/check-theme.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "There is no explicit assisted-furigana quiz reveal; adding one requires #55/#63 assistance records."
+    },
+    {
+      "id": 27,
+      "summary": "Require an explicit recall attempt before flashcard answers.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Flashcard fronts invite recall before Flip card; answer-side Got it/Again controls record study/completion separately from assessed mastery.",
+      "evidence": [
+        "web/flashcards.js",
+        "web/flashcards.css",
+        "README.md"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "A learner can flip immediately; no attempted-recall state or explicit Show answer when stuck is recorded."
+      ],
+      "nextAction": "Add a clear recall-attempt or cannot-recall action and Show answer semantics without equating self-ratings to assessed success."
+    },
+    {
+      "id": 28,
+      "summary": "Use multiple-choice, cloze, typed readings and composition with distinct evidence.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "The bank includes multiple-choice context/cloze, grammar form, sentence-order target and text-grammar formats with separate skill/type metadata.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/course.ts",
+        "web/quiz.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-full-mock.mjs"
+      ],
+      "gaps": [
+        "Typed reading and interactive full-sentence composition are absent; all current assessed responses are option selections."
+      ],
+      "nextAction": "Introduce supported response types and evidence distinctions alongside canonical accepted-answer validation and migrations."
+    },
+    {
+      "id": 29,
+      "summary": "Validate typed Japanese conservatively with verified alternatives.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Current grading compares canonical option IDs exactly; it does not perform unsafe free-text normalization.",
+      "evidence": [
+        "src/types.ts",
+        "src/lib/engine.ts",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "scripts/check-core.mjs"
+      ],
+      "gaps": [
+        "There is no typed-answer schema, input, normalization policy or verified alternative-answer bank."
+      ],
+      "nextAction": "Define narrow per-task normalization and accepted alternatives, with tests retaining assessed particle, kana, spelling and conjugation distinctions."
+    },
+    {
+      "id": 30,
+      "summary": "Keep exercises focused with accurate counters, submission and an exit.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "One question is shown with question/answered counts, native answer controls and predictable Check/Next/Submit behavior. Navigation leaves the saved attempt available; mock clocks explicitly continue.",
+      "evidence": [
+        "web/quiz.js",
+        "web/app.js",
+        "web/sessions.js"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/check-full-mock.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Leaving untimed learning is the pause mechanism; exam time cannot be paused mid-section."
+    },
+    {
+      "id": 31,
+      "summary": "Explain grammar form, meaning, register, constraints and prerequisite links.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Grammar entries include meaning, attachment rules, examples, a corrected common mistake and comparison; many explain register and use constraints in prose.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/expanded-grammar.ts",
+        "src/content/foundation-review.ts",
+        "src/content/advanced-review.ts",
+        "web/study.js"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-foundations.mjs",
+        "tools/check-advanced.mjs"
+      ],
+      "gaps": [
+        "Register/constraint coverage is not explicitly audited for every pattern, and targeted prerequisite-form links are absent."
+      ],
+      "nextAction": "Add reviewed prerequisite IDs and explicit register/constraint notes where they affect acceptable use."
+    },
+    {
+      "id": 32,
+      "summary": "Provide natural translated grammar examples with relevant sentence-part explanations.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Patterns have several original translated examples plus attachment, mistake and comparison explanations.",
+      "evidence": [
+        "src/content/expanded-grammar.ts",
+        "src/content/foundation-review.ts",
+        "src/content/advanced-review.ts",
+        "web/study.js"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-advanced.mjs"
+      ],
+      "gaps": [
+        "Examples do not consistently annotate the relevant sentence parts and explain their role."
+      ],
+      "nextAction": "Add focused example annotations for attachment, scope and clause relationship without duplicating entire lesson explanations."
+    },
+    {
+      "id": 33,
+      "summary": "Explain distinctions between confusing grammar alternatives.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Every grammar entry has a comparison and common-mistake explanation; question explanations discuss why each meaningful option fits or fails.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/expanded-grammar.ts",
+        "src/content/advanced-review.ts",
+        "web/study.js",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-advanced.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Structural checks require explanations; targeted editorial audits improve concrete ambiguities but do not prove every linguistic judgment."
+    },
+    {
+      "id": 34,
+      "summary": "Reduce grammar retrieval support progressively rather than permit example copying.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Learning explanations precede related original questions; answers remain hidden until checked.",
+      "evidence": [
+        "web/path.js",
+        "web/study.js",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "No staged support/hint ladder or prompt-variation progression is implemented; learned examples can resemble subsequent cloze contexts."
+      ],
+      "nextAction": "Author fresh retrieval variants and adjustable fading hints, recording each assistance level."
+    },
+    {
+      "id": 35,
+      "summary": "Offer keyboard-accessible sentence composition and grammatical explanations.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Sentence-order questions show four fragments and ask which belongs at the target position; native choices work by keyboard and explanations show the complete sentence.",
+      "evidence": [
+        "src/types.ts",
+        "web/quiz.js",
+        "src/content/course.ts"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "Learners cannot build or reorder the entire sentence with accessible move controls; existing questions assess a selected target slot."
+      ],
+      "nextAction": "Add an original full-composition response type with move-up/down or equivalent keyboard controls and clause-order reasoning."
+    },
+    {
+      "id": 36,
+      "summary": "Provide original N3 short, medium, long and information-retrieval reading tasks.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Original practical messages, notices, articles and advertisements supply the supported N3 reading formats with explicit question-type metadata.",
+      "evidence": [
+        "src/content/course.ts",
+        "src/content/expanded-passages.ts",
+        "web/study.js",
+        "REFERENCES.md"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-full-mock.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Authored lengths and difficulty are study groupings, not certification of official calibrated difficulty."
+    },
+    {
+      "id": 37,
+      "summary": "Explain submitted reading answers with supporting passage evidence.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Reading feedback includes original per-option reasoning, quoted supporting evidence, and a post-submission passage/translation disclosure.",
+      "evidence": [
+        "src/types.ts",
+        "web/quiz.js",
+        "src/content/expanded-passages.ts"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 38,
+      "summary": "Offer accessible glossary lookup and record assessment assistance.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Safe background-word definitions open by hover, focus or tap; answer/evidence/shared-question clues are protected and mock lookup is disabled.",
+      "evidence": [
+        "web/glossary.js",
+        "web/glossary-ui.js",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "tools/check-glossary.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "Glossary use is deliberately unrecorded and cannot be separated from unaided assessment history."
+      ],
+      "nextAction": "Record relevant lookup events per attempt/question and propagate assisted-result labels without exposing protected clues."
+    },
+    {
+      "id": 39,
+      "summary": "Control reading difficulty and prerequisite gaps explicitly.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Passages are level-tagged, cover varied lengths/inference tasks and link related topic grammar. Original lesson examples introduce selected targets.",
+      "evidence": [
+        "src/content/learning-path.ts",
+        "src/content/expanded-passages.ts",
+        "src/content/advanced-review.ts",
+        "web/study.js"
+      ],
+      "tests": [
+        "tools/check-path.mjs",
+        "tools/check-advanced.mjs"
+      ],
+      "gaps": [
+        "No item-level lexical/grammar prerequisite audit or controlled difficulty sequence establishes that every passage's unfamiliar forms were introduced."
+      ],
+      "nextAction": "Annotate passage prerequisites and deliberate unknowns, then review length, inference and lexical progression independently."
+    },
+    {
+      "id": 40,
+      "summary": "Bookmark concepts and store safe private notes by content ID.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Vocabulary bookmarks persist, show a filled Saved indicator and filter cards/flashcard decks. Rendered app content uses text nodes.",
+      "evidence": [
+        "web/study.js",
+        "web/flashcards.js",
+        "web/ui.js",
+        "src/lib/storage.ts"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "Bookmarks do not cover every concept type; private notes and their validated backup/migration schema are absent."
+      ],
+      "nextAction": "Add stable concept bookmarks and bounded plain-text notes with safe rendering and import validation."
+    },
+    {
+      "id": 41,
+      "summary": "Provide real playable audio and exclude transcript-only listening evidence.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Original scripts play through explicit Japanese browser speech when available; supplied audioUrl playback is supported. Script study and excluded failures have no listening accuracy/mastery contribution.",
+      "evidence": [
+        "web/audio.js",
+        "web/quiz.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "No recorded audio bank is shipped; speech depends on the device/browser and is clearly labeled synthesized practice."
+    },
+    {
+      "id": 42,
+      "summary": "Require learner action to start audio.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Audio starts only from Play/replay; opening screens merely discovers voices. Navigation, page hiding and disposal stop playback.",
+      "evidence": [
+        "web/audio.js",
+        "web/app.js",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 43,
+      "summary": "Offer accessible pause, replay, progress and volume with playback states.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Labeled Play/replay and Stop controls expose loading, ready, starting, playing, finished, missing and error status text.",
+      "evidence": [
+        "web/audio.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "No Pause/resume, seek/progress display or volume control is exposed; Stop restarts from the beginning."
+      ],
+      "nextAction": "Add meaningful supported audio controls with keyboard semantics and truthful capability fallbacks for speech synthesis."
+    },
+    {
+      "id": 44,
+      "summary": "Separate slow assisted learning from normal-speed listening practice.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Browser speech currently uses one fixed rate of 0.9; transcripts are classified separately.",
+      "evidence": [
+        "web/audio.js",
+        "src/types.ts",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "No speed selector, normal-speed assessment mode or saved assisted-speed outcome exists."
+      ],
+      "nextAction": "Add capability-aware learning speed choices and persist per-attempt playback assistance before reporting comparable results."
+    },
+    {
+      "id": 45,
+      "summary": "Hide initial listening transcripts and reveal them with explanations.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Audio attempts conceal the transcript initially; completed results provide transcript/translation disclosure. An explicit accommodation switches learning to unscored script study.",
+      "evidence": [
+        "web/study.js",
+        "web/path.js",
+        "web/quiz.js",
+        "web/app.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Learner-requested early transcript access remains available under #50 and cannot count as unaided listening."
+    },
+    {
+      "id": 46,
+      "summary": "Cover supported N3 listening purposes and task categories.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Original N3 questions cover required actions, key points, general outline, suitable expressions and quick responses with task-specific scripts and explanations.",
+      "evidence": [
+        "src/content/expanded-passages.ts",
+        "src/content/course.ts",
+        "REFERENCES.md"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-full-mock.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Suitable-expression tasks use stated situations rather than claiming to reproduce official picture-based test delivery."
+    },
+    {
+      "id": 47,
+      "summary": "Handle failed audio without awarding listening completion.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Missing voices, playback rejection and start watchdogs show useful error/retry or script-study paths. Assessment questions can be excluded; no failure callback marks a task complete.",
+      "evidence": [
+        "web/audio.js",
+        "web/quiz.js",
+        "web/study.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "A learner may independently set a manual completion checkmark; it remains separate from assessed listening evidence."
+    },
+    {
+      "id": 48,
+      "summary": "Use licensed varied speakers when available without invented audio-quality claims.",
+      "status": "blocked",
+      "stage": 1,
+      "existingBehavior": "Scripts cover natural everyday and advanced contexts. The UI states that audio is device-dependent synthesized practice and uses the first available Japanese voice.",
+      "evidence": [
+        "web/audio.js",
+        "src/content/expanded-passages.ts",
+        "src/content/advanced-review.ts",
+        "README.md"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "No suitable licensed or commissioned multi-speaker human recordings and associated rights/provenance metadata are available in the repository."
+      ],
+      "nextAction": "When recordings and permission evidence are available, add verified speakers and quality/size metadata; keep text-to-speech claims accurate meanwhile."
+    },
+    {
+      "id": 49,
+      "summary": "Load audio on demand without preloading the whole course.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Speech utterances are created on Play. Supplied audio elements use preload none and release sources on disposal; the homepage does not download a course audio library.",
+      "evidence": [
+        "web/audio.js",
+        "index.html"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Future supplied files need measured encoding/size limits; current scripts contain no recorded audio assets."
+    },
+    {
+      "id": 50,
+      "summary": "Provide transcript accommodation with honest assessment classification.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Learners may reveal scripts or choose unscored script study. Seen scripts persist across the tab/reload and mark associated later listening questions unscored without blocking the course.",
+      "evidence": [
+        "web/app.js",
+        "web/study.js",
+        "web/path.js",
+        "web/quiz.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Seen-script protection is browser-tab/session scoped, not lifelong or cross-device familiarity evidence."
+    },
+    {
+      "id": 51,
+      "summary": "Show learning feedback and conceptual explanation after submission.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Practice/review require Check answer before Next; checked answers lock and show outcome, canonical answer, all option explanations and applicable evidence/completed sentence.",
+      "evidence": [
+        "web/quiz.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 52,
+      "summary": "Withhold exam feedback and distinguish timed exam from learning.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Full-mock section timers, locks and breaks are explicit; answers, translations and explanations remain hidden until every section is submitted.",
+      "evidence": [
+        "web/quiz.js",
+        "web/sessions.js",
+        "web/app.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/check-full-mock.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 53,
+      "summary": "Explain correct choices and meaningful distractors.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Every question has a canonical correct option and original explanations keyed to all options; feedback preserves shuffled display order while showing the correct reasoning.",
+      "evidence": [
+        "src/types.ts",
+        "src/content/index.ts",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "tools/check-content.mjs",
+        "tools/check-foundations.mjs",
+        "tools/check-advanced.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Structural completeness and targeted editorial corrections do not certify every distractor's linguistic quality."
+    },
+    {
+      "id": 54,
+      "summary": "Offer progressive hints without prematurely showing the final answer.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Answers remain hidden until Check or final submission, and safe background glosses avoid answer clues.",
+      "evidence": [
+        "web/quiz.js",
+        "web/glossary.js",
+        "src/types.ts"
+      ],
+      "tests": [
+        "tools/check-glossary.mjs"
+      ],
+      "gaps": [
+        "No authored hint ladder, hint action or explicit final-answer reveal event is implemented."
+      ],
+      "nextAction": "Add staged original hints and assistance records before integrating them into grading or review scheduling."
+    },
+    {
+      "id": 55,
+      "summary": "Preserve first outcomes and separately record hints, reveals, skips and retries.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Saved attempt history retains original answers; aggregate accuracy distinguishes the first assessed outcome from later retries. Transcript study and technical exclusions are separate.",
+      "evidence": [
+        "src/types.ts",
+        "src/lib/engine.ts",
+        "web/app.js",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [
+        "No per-question hint, glossary, reveal, intentional skip or recall-attempt event schema exists; unanswered counts do not identify why an item was left blank."
+      ],
+      "nextAction": "Add versioned assistance/response events without rewriting historical first outcomes."
+    },
+    {
+      "id": 56,
+      "summary": "Search and group a concept/skill mistake queue without duplicate cards.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "A persistent question-keyed queue updates repeated misses of the same question, sorts due/learning/mastered states and supports due or early retries.",
+      "evidence": [
+        "web/app.js",
+        "src/types.ts",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [
+        "No search or concept/skill grouping exists; different questions for one concept produce separate review records."
+      ],
+      "nextAction": "Add searchable concept-plus-skill review grouping with preserved question evidence and a migration for existing review records."
+    },
+    {
+      "id": 57,
+      "summary": "Link mistakes to immediate relearning explanations and the relevant lesson.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Each mistake has an expandable original answer/explanation and an immediate Retry question action.",
+      "evidence": [
+        "web/app.js",
+        "src/types.ts",
+        "web/study.js",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "The mistake card does not link directly to its grammar/vocabulary lesson or a short concept-focused relearning flow."
+      ],
+      "nextAction": "Resolve canonical concept IDs to focused study routes and a brief relearn-then-retrieve action."
+    },
+    {
+      "id": 58,
+      "summary": "Retry missed concepts later through fresh examples.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Adaptive ordinary practice transfers grammar/vocabulary weakness to related unseen questions. Scheduled mistake retries reuse the original saved question.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "web/app.js"
+      ],
+      "tests": [
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [
+        "The due-review flow does not select fresh concept variants or distinguish correction recall from transfer to new context."
+      ],
+      "nextAction": "Add reviewed variant groups and concept/skill transfer evidence without losing the original miss."
+    },
+    {
+      "id": 59,
+      "summary": "Use respectful feedback with independent encouragement, animation and sound choices.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Feedback is written respectfully; sound effects have a persisted mute setting and animation respects system reduced motion.",
+      "evidence": [
+        "web/quiz.js",
+        "web/sounds.js",
+        "web/app.js",
+        "web/effects.css"
+      ],
+      "tests": [
+        "tools/check-sounds.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [
+        "There are no independent in-app preferences for encouragement messages and animations."
+      ],
+      "nextAction": "Add validated independent preferences while retaining system reduced-motion precedence and accessible written outcomes."
+    },
+    {
+      "id": 60,
+      "summary": "Summarize practiced concepts, corrections, weaknesses and a useful next action.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Results show raw correct/total, skill counts, unanswered/excluded items, retry labels, per-question explanations and a Finish review action without practice restrictions.",
+      "evidence": [
+        "web/quiz.js",
+        "web/app.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-full-mock.mjs"
+      ],
+      "gaps": [
+        "No concept-level recap identifies corrected recurring mistakes, remaining weak concepts or a targeted next lesson/review action."
+      ],
+      "nextAction": "Build a concise evidence-based summary from actual attempt/concept history with optional next study and a clear stop action."
+    },
+    {
+      "id": 61,
+      "summary": "Document a deterministic local spaced-review scheduler.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "A miss becomes due after one local calendar day. Successful due review advances through three- and seven-day intervals; three successful due retries mark the question mastered. Early success does not advance it.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "web/app.js",
+        "README.md"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-browser-core.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "This is an explicit simple rule set, not an asserted implementation of Anki FSRS or another adaptive algorithm."
+    },
+    {
+      "id": 62,
+      "summary": "Keep mastery evidence specific to the assessed skill.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Review evidence belongs to a specific question and skill; one result does not master a word's other questions/skills. Manual flashcard/lesson checks do not alter assessed accuracy or mastery.",
+      "evidence": [
+        "src/types.ts",
+        "src/lib/engine.ts",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/check-learning.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Question mastery is deliberately narrower than demonstrated concept transfer; #58/#64 record that remaining work."
+    },
+    {
+      "id": 63,
+      "summary": "Schedule distinct outcomes for unaided, assisted, revealed and failed recall.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Correct/incorrect due retries drive the scheduler; script-assisted listening and excluded failures cannot advance assessment mastery.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "src/types.ts",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs"
+      ],
+      "gaps": [
+        "General hint/glossary/reveal assistance is not recorded, so the scheduler cannot distinguish these outcomes from unaided answers."
+      ],
+      "nextAction": "Define conservative assistance-aware scheduling rules and migrate event history before enabling new assisted answer flows."
+    },
+    {
+      "id": 64,
+      "summary": "Require spaced recall and prevent identical-prompt mastery inflation.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Only three correct due-review sessions separated by scheduled dates mark a question mastered; immediate/early success and ordinary repeated practice do not advance its streak.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "web/path.js",
+        "README.md"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-browser-core.mjs"
+      ],
+      "gaps": [
+        "All three due successes may use the same original prompt; there is no fresh-variant concept-transfer requirement."
+      ],
+      "nextAction": "Keep current question-level mastery clearly scoped and add separate fresh-context evidence before claiming strong concept mastery."
+    },
+    {
+      "id": 65,
+      "summary": "Store consistent due timestamps and explicitly handle local timezone changes.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Study/review timestamps use UTC ISO strings; local calendar arithmetic preserves time of day and dates render in the browser locale.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "src/lib/storage.ts",
+        "web/app.js"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "src/lib/engine.test.ts"
+      ],
+      "gaps": [
+        "The UI does not display the active timezone or an explicit timezone-change policy.",
+        "No executable multi-timezone, DST and timezone-change regression matrix is present; a retained legacy test covers local midnight."
+      ],
+      "nextAction": "Publish a consistent timezone policy, show the current zone, and test calendar/DST/travel boundaries using the npm-free suite."
+    },
+    {
+      "id": 66,
+      "summary": "Configure new and review batch sizes with visible workload.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Ordinary practice supports one to one hundred questions with an available-pool count; due review starts a fixed five-question batch and path daily portions are fixed.",
+      "evidence": [
+        "web/sessions.js",
+        "web/app.js",
+        "src/content/learning-path.ts"
+      ],
+      "tests": [
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [
+        "No separate saved new-item/review caps or combined workload preview exists."
+      ],
+      "nextAction": "Add independent validated caps and a pre-session due/new/earlier breakdown."
+    },
+    {
+      "id": 67,
+      "summary": "Retain overdue review items after missed days.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Unmastered records remain due whenever dueAt is at or before now; missed days do not delete records or reset the course.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "web/app.js",
+        "src/lib/storage.ts"
+      ],
+      "tests": [
+        "tools/check-learning.mjs",
+        "tools/check-browser-core.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 68,
+      "summary": "Separate scheduled review and optional extra practice predictably.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Due review, Practice early and ordinary practice are distinct. Early correct answers do not advance due mastery; any new assessed miss resets learning and schedules the next local day. Rules are shown and documented.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "web/app.js",
+        "README.md"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-browser-core.mjs",
+        "tools/check-learning.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 69,
+      "summary": "Reduce recommended new study when review backlog grows, with override.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Practice prioritizes due and recently missed questions while reserving some unseen material; dashboard shows the due count.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "web/dashboard.js",
+        "web/sessions.js"
+      ],
+      "tests": [
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [
+        "No backlog-sensitive new-item recommendation, rationale or explicit override is presented."
+      ],
+      "nextAction": "Show an inspectable recommended new/review mix based on backlog, retaining learner control."
+    },
+    {
+      "id": 70,
+      "summary": "Mix due, recent, earlier and new material with varied nonduplicate session prompts.",
+      "status": "existing",
+      "stage": 2,
+      "existingBehavior": "Adaptive selection ranks due/recent misses and weak related concepts, reserves unseen material and deduplicates a session. Path practice adds up to four earlier questions to current material with shuffled tie selection.",
+      "evidence": [
+        "src/lib/engine.ts",
+        "src/content/learning-path.ts",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/check-learning.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Future concept-level due review still needs fresh variants under #58; this requirement describes available mixed practice."
+    },
+    {
+      "id": 71,
+      "summary": "Let learners choose meaningful activity-based goals without counting idle time.",
+      "status": "existing",
+      "stage": 2,
+      "existingBehavior": "A saved one-to-one-thousand learning-action goal counts studied content once per local item/day and answered nonexcluded questions in submitted sessions. Page views and idle time do not count.",
+      "evidence": [
+        "web/app.js",
+        "web/dashboard.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "The supported goal basis is learning activities; active-time goals are not implemented."
+    },
+    {
+      "id": 72,
+      "summary": "Show timezone-aware meaningful streaks and test midnight/travel boundaries.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Streaks use local calendar days containing actual recorded study or submitted answered activity, with no idle/page-view credit. A retained fixture tests item/day deduplication across midnight.",
+      "evidence": [
+        "web/app.js",
+        "web/dashboard.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "src/lib/engine.test.ts"
+      ],
+      "gaps": [
+        "The active local timezone is not visible; timezone changes/DST and streak boundary behavior lack the requested executable test matrix."
+      ],
+      "nextAction": "Display the zone and test streak computation across midnight, DST and timezone changes without silently rewriting historical activity."
+    },
+    {
+      "id": 73,
+      "summary": "Welcome returning learners with a small restart and intact history.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Completed tasks, reviews and historical attempts persist after inactivity; saved sessions remain resumable.",
+      "evidence": [
+        "web/dashboard.js",
+        "web/app.js",
+        "src/lib/storage.ts"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/check-migration.mjs"
+      ],
+      "gaps": [
+        "No returning-after-missed-days message or small tailored restart session is offered."
+      ],
+      "nextAction": "Offer an optional short due/earlier restart without resetting progress or pressuring the learner."
+    },
+    {
+      "id": 74,
+      "summary": "Keep learning and retries unrestricted after mistakes.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "There are no hearts, energy limits, payments or incorrect-answer penalties blocking practice; due and early retries remain accessible.",
+      "evidence": [
+        "web/app.js",
+        "web/sessions.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 75,
+      "summary": "If XP is added, define rules and award each event once.",
+      "status": "optional",
+      "stage": 3,
+      "existingBehavior": "No XP system exists; study events and submissions are already idempotent for their supported purposes.",
+      "evidence": [
+        "src/types.ts",
+        "src/lib/engine.ts",
+        "web/dashboard.js"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [
+        "XP rules, event-award IDs and reward display are absent because XP has not been selected."
+      ],
+      "nextAction": "Only if selected, define qualifying events and persisted idempotent award records before exposing points."
+    },
+    {
+      "id": 76,
+      "summary": "Offer optional measurable badges with visible criteria.",
+      "status": "optional",
+      "stage": 3,
+      "existingBehavior": "Completion checks and review streaks provide evidence that could support badges; no achievement reward system is claimed.",
+      "evidence": [
+        "src/types.ts",
+        "src/lib/engine.ts",
+        "web/path.js"
+      ],
+      "tests": [
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [
+        "Achievement badges and their criteria/award records are not implemented; UI status badges are not achievement badges."
+      ],
+      "nextAction": "If selected, choose few measurable criteria and expose how each badge was earned."
+    },
+    {
+      "id": 77,
+      "summary": "Use the existing mascot for restrained optional encouragement.",
+      "status": "implemented",
+      "stage": 3,
+      "existingBehavior": "Momo remains the original Kotoba mascot. A brief user-triggered logo celebration and restrained UI motion respect reduced-motion preferences; no celebration is required to study.",
+      "evidence": [
+        "web/mascot.svg",
+        "web/celebrations.js",
+        "web/celebrations.css",
+        "web/app.js"
+      ],
+      "tests": [
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Independent encouragement/motion preferences remain deferred under #59; this is a small voluntary mascot interaction."
+    },
+    {
+      "id": 78,
+      "summary": "Offer optional meaningful personal weekly challenges without competition.",
+      "status": "optional",
+      "stage": 3,
+      "existingBehavior": "Daily action goals and a recent-week habit display exist locally, with no public competition.",
+      "evidence": [
+        "web/dashboard.js",
+        "web/app.js"
+      ],
+      "tests": [],
+      "gaps": [
+        "No personal weekly challenge configuration, progress record or completion criteria exists."
+      ],
+      "nextAction": "If selected, add an opt-in local challenge based on listening activity or due review, without restricting other study."
+    },
+    {
+      "id": 79,
+      "summary": "Show sampled skill progress with assisted/unaided and limited-history caveats.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Skill balance shows first-assessed correct/total counts and no-assessed-history text; initial/retry history is separated and transcript listening is excluded.",
+      "evidence": [
+        "web/dashboard.js",
+        "web/app.js",
+        "src/lib/engine.ts"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/check-learning.mjs"
+      ],
+      "gaps": [
+        "General assistance is unrecorded, so unaided/assisted breakdowns are unavailable; small nonzero sample counts have no confidence/trend caveat."
+      ],
+      "nextAction": "Add assistance-aware sample counts and restrained limited-history messaging before introducing trends."
+    },
+    {
+      "id": 80,
+      "summary": "Keep completion, accuracy, scores, effort and mastery honest and separate.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Manual checkmarks, daily learning actions, first/retry accuracy, raw mock scores and spaced-review question mastery are independent and explicitly labeled. No pass probability or certification is shown.",
+      "evidence": [
+        "web/path.js",
+        "web/dashboard.js",
+        "web/quiz.js",
+        "src/lib/engine.ts",
+        "README.md"
+      ],
+      "tests": [
+        "tools/check-learning.mjs",
+        "tools/check-path.mjs",
+        "tools/check-full-mock.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 81,
+      "summary": "Group navigation into learning, practice/review and utilities.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "All nine direct routes have text/icons and aria-current active indicators; mobile quick navigation and the full menu preserve access.",
+      "evidence": [
+        "web/app.js",
+        "web/styles.css"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [
+        "The desktop/sidebar route list is flat and does not render the requested learning, practice/review and utilities groups."
+      ],
+      "nextAction": "Introduce semantic group labels without changing existing routes or hiding utilities."
+    },
+    {
+      "id": 82,
+      "summary": "Keep desktop layouts compact with actions near their settings.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Study menus follow the selected article's natural height, setup controls share a compact card, and flashcards reserve a stable frame with reachable overflowing definitions.",
+      "evidence": [
+        "web/styles.css",
+        "web/design.css",
+        "web/flashcards.css",
+        "web/sessions.js"
+      ],
+      "tests": [
+        "tools/check-ui-enhancements.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "A long integrated lesson remains a scrollable study flow rather than forcing all content into a viewport."
+    },
+    {
+      "id": 83,
+      "summary": "Stack mobile content with accessible collapsible navigation and reachable controls.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Responsive layouts stack content, cap mobile study menus, and expose labeled Menu toggles with expanded/controls state and Escape focus return. Browser checks exercise narrow screens and overflow.",
+      "evidence": [
+        "web/app.js",
+        "web/styles.css",
+        "web/design.css",
+        "web/flashcards.css"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Verified Chrome desktop/mobile emulation is not a claim that every browser/device has been checked."
+    },
+    {
+      "id": 84,
+      "summary": "Share design tokens and truthful native-browser control fallbacks.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Shared light/dark tokens cover surfaces, text, actions, borders and focus. Dropdown enhancement retains native selects as fallback; scrollbar styling is progressive and system fonts are used.",
+      "evidence": [
+        "web/design.css",
+        "web/styles.css",
+        "web/dropdowns.js",
+        "web/dropdowns.css"
+      ],
+      "tests": [
+        "tools/check-theme.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Native appearance and scrollbar behavior may differ across browsers; identical rendering is not promised."
+    },
+    {
+      "id": 85,
+      "summary": "Provide readable Japanese text and adjustable text sizing.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "System/Japanese font fallbacks, passage line spacing, wrapping and browser zoom support readable long text.",
+      "evidence": [
+        "web/styles.css",
+        "web/design.css",
+        "web/flashcards.css"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "There is no saved app text-size preference; small instruction/status text and 200% text-resize/reflow have not been comprehensively checked."
+      ],
+      "nextAction": "Add a consistent text-size setting and verify zoom/reflow with Japanese passages, fixed frames and controls."
+    },
+    {
+      "id": 86,
+      "summary": "Verify a WCAG 2.2 AA target rather than assume conformance.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Visible focus, labels, text/icons beside status colors, skip navigation and responsive control journeys are present and exercised.",
+      "evidence": [
+        "web/ui.js",
+        "web/app.js",
+        "web/design.css",
+        "web/dropdowns.js",
+        "README.md"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [
+        "No complete contrast-ratio, target-size, zoom/reflow, screen-reader and interaction audit establishes WCAG 2.2 AA conformance."
+      ],
+      "nextAction": "Measure the relevant criteria and test assistive technology; fix concrete failures and document remaining browser-specific limits."
+    },
+    {
+      "id": 87,
+      "summary": "Support keyboard navigation, answers, current ordering tasks, dialogs and audio.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Native radios/buttons support answers, target-slot ordering and audio; enhanced dropdowns support arrows/typeahead/Enter/Escape. Dialogs contain focus deliberately and Escape restores it; skip/menu controls work by keyboard.",
+      "evidence": [
+        "web/app.js",
+        "web/quiz.js",
+        "web/audio.js",
+        "web/dropdowns.js",
+        "web/customize.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Full-sentence interactive ordering remains unimplemented under #35; this describes the actual option-based ordering exercises."
+    },
+    {
+      "id": 88,
+      "summary": "Label semantics and announce feedback/errors without unexpected focus movement.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Headings, Japanese lang attributes, field labels, fieldsets/legends and status/error regions exist; focus is captured/restored through rerenders and dialogs.",
+      "evidence": [
+        "web/ui.js",
+        "web/app.js",
+        "web/quiz.js",
+        "web/audio.js",
+        "web/sessions.js"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "Answer explanation/outcome containers have no dedicated live announcement; relevant feedback has not been verified with a screen reader."
+      ],
+      "nextAction": "Announce a concise answer outcome via a stable live region and verify focus/announcement order without rereading the full explanation."
+    },
+    {
+      "id": 89,
+      "summary": "Respect reduced motion and optional sound with understandable static transitions.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Page, lesson, feedback, dropdown and completion effects have reduced-motion fallbacks; sound effects can be muted and outcomes remain written. The optional mascot interaction follows the same motion preference.",
+      "evidence": [
+        "web/effects.css",
+        "web/design.css",
+        "web/celebrations.js",
+        "web/celebrations.css",
+        "web/sounds.js",
+        "web/app.js"
+      ],
+      "tests": [
+        "tools/check-sounds.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Independent app animation preferences remain deferred under #59; system reduced motion already takes precedence."
+    },
+    {
+      "id": 90,
+      "summary": "Persist supported theme, furigana, playback and display preferences consistently.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "Theme, furigana, sound effects, selected study level, dashboard order/visibility and lesson resume persist and travel through validated backups.",
+      "evidence": [
+        "src/types.ts",
+        "src/lib/storage.ts",
+        "web/app.js",
+        "web/flashcards.js",
+        "web/customize.js"
+      ],
+      "tests": [
+        "tools/check-theme.mjs",
+        "tools/check-sounds.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": [
+        "Playback rate/volume and text-size settings do not exist; transient flashcard/session preferences are not persisted across visits."
+      ],
+      "nextAction": "Persist newly supported preferences with validated defaults and consistent screen behavior, without claiming unavailable playback controls."
+    },
+    {
+      "id": 91,
+      "summary": "Autosave resume, answers and results; report persistence failures honestly.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Lesson ID, answer selections, checked outcomes and submitted results save through validated storage. Saved appears only after successful writes; blocked/quota/corrupt storage shows warnings, retry and export recovery.",
+      "evidence": [
+        "web/app.js",
+        "src/lib/storage.ts",
+        "web/path.js",
+        "web/quiz.js"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-browser-core.mjs",
+        "tools/browser-check.mjs",
+        "tools/check-path.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Question reload resumes the first unfinished item rather than persisting arbitrary scroll/cursor position; lesson resume is the canonical lesson ID."
+    },
+    {
+      "id": 92,
+      "summary": "Validate versioned imports, preview conflicts and retain a pre-replacement backup.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "JSON export is versioned. Imports are size-bounded, validated before a confirmation with imported record counts, and invalid imports preserve current data. Corrupt original saved bytes remain recoverable.",
+      "evidence": [
+        "web/app.js",
+        "src/lib/storage.ts"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/check-migration.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "The confirmation does not compare conflicts/current-versus-imported state or offer a merge preview.",
+        "A recoverable backup of valid current progress is not automatically retained before a confirmed replacement."
+      ],
+      "nextAction": "Show concrete replacement differences and save/export a recoverable pre-import snapshot before replacing valid progress."
+    },
+    {
+      "id": 93,
+      "summary": "Explain local storage and confirm destructive reset inside the app.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Settings explains browser/device-local storage and origin/browser changes. Reset requires an explicit in-app dialog, Cancel/Escape preserves progress and confirmed reset clears supported learning records.",
+      "evidence": [
+        "web/app.js",
+        "README.md"
+      ],
+      "tests": [
+        "tools/browser-check.mjs",
+        "tools/check-ui-enhancements.mjs"
+      ],
+      "gaps": []
+    },
+    {
+      "id": 94,
+      "summary": "Optionally add base-path-scoped installable offline support after core verification.",
+      "status": "optional",
+      "stage": 3,
+      "existingBehavior": "Direct-file loading uses local assets without npm or a server; hosted use is static but does not promise offline reloads.",
+      "evidence": [
+        "index.html",
+        "tools/package-site.mjs",
+        "README.md"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "There is no install manifest, scoped service worker or managed offline cache."
+      ],
+      "nextAction": "If selected after core verification, implement opt-in offline support and test root/project scopes, upgrades and cache recovery."
+    },
+    {
+      "id": 95,
+      "summary": "Allow deliberate per-unit/audio downloads with size and removal controls.",
+      "status": "deferred",
+      "stage": 3,
+      "existingBehavior": "Learners can download progress JSON; local static files can be copied manually. Audio is generated on demand rather than downloaded as a managed library.",
+      "evidence": [
+        "web/app.js",
+        "web/audio.js",
+        "tools/package-site.mjs"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "There is no selected-unit download manager, offline availability/size view or asset-removal UI independent of progress.",
+        "Downloadable licensed audio files are not available; browser speech may depend on a network-backed voice."
+      ],
+      "nextAction": "After #94 and licensed-asset planning, add explicit per-unit caching with byte estimates and removal that leaves learning records intact."
+    },
+    {
+      "id": 96,
+      "summary": "Keep data local, avoid trackers and safely render/import public frontend data.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "The active app has no analytics/cloud data transmission. Import accepts only validated canonical progress fields; UI rendering uses text nodes and the publisher/test links are explicit external navigation.",
+      "evidence": [
+        "web/ui.js",
+        "src/lib/storage.ts",
+        "web/app.js",
+        "index.html",
+        "tools/package-site.mjs"
+      ],
+      "tests": [
+        "tools/check-browser-core.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "Future notes/downloaded assets still require validation. No secrets are needed or intentionally included; this is not a general repository secret-scanner result."
+    },
+    {
+      "id": 97,
+      "summary": "Optimize payloads and slower connections using measurements.",
+      "status": "deferred",
+      "stage": 2,
+      "existingBehavior": "A small local SVG, system fonts, on-demand audio and 24-card pagination avoid external font/image libraries or eager audio downloads.",
+      "evidence": [
+        "index.html",
+        "web/mascot.svg",
+        "web/audio.js",
+        "web/study.js",
+        "tools/package-site.mjs"
+      ],
+      "tests": [
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [
+        "The entire generated content bank loads initially; there is no measured slow-network performance budget or content/code splitting analysis."
+      ],
+      "nextAction": "Measure packaged transfer sizes and first usable study under throttling, then optimize only demonstrated bottlenecks while preserving no-npm/direct-file use."
+    },
+    {
+      "id": 98,
+      "summary": "Use reproducible checks and publish only intended assets from trusted branches.",
+      "status": "existing",
+      "stage": 1,
+      "existingBehavior": "Node-only generation/check/package commands produce _site from public HTML/web assets. Pull requests run checks; deployment permissions and publication are restricted to main/master trusted-branch runs.",
+      "evidence": [
+        "tools/build-browser.mjs",
+        "tools/package-site.mjs",
+        ".github/workflows/pages.yml",
+        "README.md"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-content.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "gaps": [],
+      "scopeLimit": "No actual remote deployment is asserted. Browser journeys run locally; the workflow currently runs native content/logic checks."
+    },
+    {
+      "id": 99,
+      "summary": "Test grading, scheduling, dates, idempotence, migration, recovery, resume, audio, keyboard and Pages.",
+      "status": "deferred",
+      "stage": 1,
+      "existingBehavior": "Executable native and Chrome/CDP suites exercise grading, due transitions, idempotent submit, migrations, corrupt/import recovery, reload/resume, failed speech, keyboard/dropdowns/dialogs and packaged subpath/direct-file routes.",
+      "evidence": [
+        "README.md",
+        "scripts/check-core.mjs",
+        "tools/browser-check.mjs"
+      ],
+      "tests": [
+        "scripts/check-core.mjs",
+        "tools/check-browser-core.mjs",
+        "tools/check-learning.mjs",
+        "tools/check-migration.mjs",
+        "tools/check-full-mock.mjs",
+        "tools/check-ui-enhancements.mjs",
+        "src/lib/engine.test.ts"
+      ],
+      "gaps": [
+        "The retained midnight fixture is in the inactive npm-based test setup; executable DST, timezone-change and midnight/streak boundary cases remain incomplete.",
+        "Screen-reader feedback and complete WCAG target verification remain unverified under #86/#88."
+      ],
+      "nextAction": "Port consequential calendar boundary cases into the active native suite and add the focused accessibility verification needed by new interactions."
+    },
+    {
+      "id": 100,
+      "summary": "Document operation and report all requirements with evidence and unresolved gaps.",
+      "status": "implemented",
+      "stage": 1,
+      "existingBehavior": "README documents setup, direct-file/local use, GitHub Pages packaging, learning behavior, backup recovery and check commands. This machine-readable file records all one hundred requirements, complete/partial/optional states and next stages.",
+      "evidence": [
+        "README.md",
+        "REFERENCES.md",
+        "docs/requirements.json"
+      ],
+      "tests": [],
+      "gaps": [],
+      "scopeLimit": "Statuses describe this audited repository stage and must be updated when later features or source evidence change."
+    }
+  ]
+}

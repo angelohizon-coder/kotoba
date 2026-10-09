@@ -1,0 +1,20 @@
+/* Gold reflects assessed mastery; a visible seam is only a reminder to retrieve again. */
+.daily-lesson-node.path-recall-gold { background: #fff4cc; border-color: #d6aa30; color: #5c470d; }
+.daily-lesson-node.path-recall-gold.selected { box-shadow: 0 0 0 3px #f0c65f; }
+.path-recall-node-status { display: inline-flex; align-items: center; gap: 6px; width: fit-content; max-width: 100%; margin-top: 7px; font-size: 0.6875rem; font-weight: 800; line-height: 1.5; overflow-wrap: anywhere; }
+.path-recall-node-status .icon { width: 15px; height: 15px; flex-shrink: 0; }
+.daily-lesson-node.path-recall-attention { position: relative; background-image: linear-gradient(114deg, transparent 45%, #ad7e19 45%, #ad7e19 45.7%, transparent 45.7%, transparent 48%, #ad7e19 48%, #ad7e19 48.7%, transparent 48.7%); border-style: dashed; }
+.path-recall-attention .path-recall-node-status { border: 1px solid #99711b; background: #fff4cc; border-radius: 8px; padding: 5px 8px; }
+.path-recall-panel { margin: 18px 0; padding: 18px; border: 2px dashed #b98c28; border-radius: 16px; background: #fff9e6; color: #574410; overflow-wrap: anywhere; min-width: 0; }
+.path-recall-panel h4 { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; font-size: 0.9375rem; }
+.path-recall-panel p { font-size: 0.8125rem; line-height: 1.7; margin: 12px 0; }
+.path-recall-panel .muted { color: #766029; }
+.path-recall-panel .button { min-height: 44px; max-width: 100%; white-space: normal; }
+.path-recall-gold:focus-visible, .path-recall-panel :focus-visible { outline: 3px solid #765714; outline-offset: 4px; }
+[data-theme="dark"] .daily-lesson-node.path-recall-gold { background: #40371e; color: #ffe8a2; border-color: #caa144; }
+[data-theme="dark"] .path-recall-attention .path-recall-node-status { background: #40371e; color: #ffe8a2; }
+[data-theme="dark"] .path-recall-panel { background: #342c1b; color: #ffe8a2; }
+[data-theme="dark"] .path-recall-panel .muted { color: #e0cd99; }
+[data-contrast="high"] .daily-lesson-node.path-recall-gold, [data-contrast="high"] .path-recall-panel { background: #fff; color: #000; border-color: #000; }
+[data-contrast="high"] .path-recall-attention .path-recall-node-status { background: #fff; color: #000; border-color: #000; }
+@media (max-width: 420px) { .path-recall-panel { padding: 14px; } .path-recall-panel .button { width: 100%; } }

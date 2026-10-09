@@ -1,0 +1,84 @@
+/* Touch dragging is limited to handles and headings; lesson content still scrolls. */
+.dashboard-widget { position: relative; }
+.widget-drag-handle {
+  display: flex; align-items: center; justify-content: center; gap: 10px; flex: 0 0 auto;
+  width: 92px; min-width: 92px; height: 44px; min-height: 44px; padding: 10px 12px;
+  font-size: 0.75rem; font-weight: 800;
+  border: 2px solid var(--line); border-radius: 12px;
+  background: var(--surface-soft); color: var(--muted);
+  cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+}
+.widget-heading-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 20px; margin-bottom: 20px; }
+.widget-heading-row > h2 { flex: 1 1 120px; min-width: 0; margin: 0; font-size: 1.1875rem; line-height: 1.5; overflow-wrap: anywhere; }
+.widget-heading-row > .widget-drag-handle { margin-left: auto; }
+.widget-heading-row > .badge { max-width: 100%; white-space: normal; }
+@media (max-width: 600px) { .widget-heading-row > .badge { order: 1; flex-basis: 100%; } }
+.widget-drag-handle:hover { color: var(--ink); border-color: var(--blue-line); }
+.widget-drag-handle:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.widget-drag-handle > * { pointer-events: none; }
+.widget-drag-handle svg { width: 18px; height: 18px; flex-shrink: 0; }
+.widget-drag-handle:disabled { opacity: .5; cursor: default; }
+.widget-drag-title, .widget-order-label { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.widget-order-item { position: relative; }
+.widget-order-handle { width: 44px; min-width: 44px; flex: 0 0 44px; padding: 8px; }
+.widget-order-label { min-width: 0; overflow-wrap: anywhere; }
+.widget-order .widget-drop-before::before { top: -8px; }
+.widget-order .widget-drop-after::after { bottom: -8px; }
+.dashboard-widgets.is-editing .dashboard-widget { grid-column: auto; min-height: 100px; border-color: var(--blue-line); cursor: grab; touch-action: none; }
+.dashboard-widgets.is-editing .dashboard-widget > :not(.widget-heading-row) { display: none; }
+.dashboard-widgets.is-editing .widget-heading-row { margin-bottom: 0; }
+.dashboard-widgets.is-editing .widget-heading-row > :not(h2):not(.widget-drag-handle) { display: none; }
+.dashboard-widgets.is-editing .widget-edit-heading { font-size: 1.125rem; }
+.home-reorder-tools { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border: 2px solid var(--blue-line); border-radius: 16px; background: var(--blue-soft); }
+.home-reorder-tools p, .widget-rearrange-option > p { font-size: 0.8125rem; margin: 6px 0 0; }
+.widget-rearrange-option > .button { width: 100%; }
+.widget-order { margin-top: 20px; }
+@media (max-width: 520px) { .home-reorder-tools { align-items: flex-start; } }
+.is-reordering, .is-reordering * {
+  cursor: grabbing !important; user-select: none; -webkit-user-select: none;
+}
+.is-reordering { overflow-anchor: none; }
+.widget-dragging { opacity: .24; pointer-events: none; outline: 2px dashed var(--blue); outline-offset: -7px; }
+.widget-drop-before::before, .widget-drop-after::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 4px;
+  background: var(--blue); border-radius: 4px; pointer-events: none;
+}
+.widget-drop-before::before { top: -14px; }
+.widget-drop-after::after { bottom: -14px; }
+.widget-drag-preview {
+  position: fixed; z-index: 1200; max-width: calc(100vw - 24px);
+  padding: 0; border: 2px solid var(--blue-line); border-radius: 18px; overflow: hidden;
+  background: var(--surface); color: var(--ink); box-shadow: 0 12px 34px rgb(0 0 0 / .24);
+  font-size: 0.8125rem; line-height: 1.5; overflow-wrap: anywhere;
+  pointer-events: none; user-select: none; -webkit-user-select: none;
+}
+.widget-drag-preview *, .widget-drag-preview *::before, .widget-drag-preview *::after { pointer-events: none !important; animation: none !important; transition: none !important; }
+.widget-drag-label { padding: 9px 14px; border-bottom: 1px solid var(--blue-line); background: var(--blue-soft); color: var(--blue-text); font-size: 0.6875rem; font-weight: 800; }
+.widget-drag-image { position: relative; max-height: min(240px,calc(100dvh - 180px)); min-height: 54px; overflow: hidden; }
+.widget-drag-card { width: 100%; max-width: 100%; min-width: 0; min-height: 0; margin: 0; padding: 17px; border: 0; border-radius: 0; background: var(--surface); box-shadow: none; opacity: 1; }
+.widget-drag-card .widget-heading-row { gap: 10px; margin-bottom: 15px; }
+.widget-drag-card .widget-heading-row h2 { font-size: 1rem; }
+.widget-drag-card .widget-drag-handle { width: 76px; min-width: 76px; height: 36px; min-height: 36px; font-size: 0.6875rem; padding: 7px; }
+.widget-drag-card .widget-drag-title { cursor: inherit; }
+.widget-drag-card > p { font-size: 0.75rem; line-height: 1.8; }
+.widget-drag-card > p + p { margin-top: 10px; }
+.widget-drag-card > .button { margin-top: 15px; }
+.widget-drag-card > .stat-number { margin: 8px 0 15px; font-size: 1.8125rem; }
+.widget-drag-card > .progress-track { margin: 14px 0; }
+.widget-drag-card .widget-order-handle { width: 36px; min-width: 36px; flex-basis: 36px; }
+.widget-drag-card.is-order-row { display: flex; align-items: center; gap: 9px; padding: 12px; }
+.widget-drag-card.is-order-row > span { flex: 1; min-width: 0; }
+.widget-drag-card.is-order-row .button { width: 36px; min-width: 36px; min-height: 36px; padding: 6px; font-size: 1rem; border: 1px solid var(--line); border-radius: 10px; }
+.widget-drag-caption { padding: 7px 14px; border-top: 1px solid var(--line); background: var(--surface-soft); color: var(--muted); font-size: 0.625rem; font-weight: 700; }
+.widget-drag-preview.is-clipped .widget-drag-image::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: linear-gradient(transparent,var(--surface)); }
+.widget-move-status {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+@media (forced-colors: active) {
+  .widget-drop-before::before, .widget-drop-after::after { background: Highlight; }
+  .widget-drag-preview { border-color: Highlight; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-reordering .dashboard-widget, .is-reordering .widget-order-item { animation: none !important; transition: none !important; }
+}

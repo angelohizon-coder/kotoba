@@ -1,0 +1,27 @@
+{
+  "name": "kotoba-n3",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "build": "node tools/build-browser.mjs",
+    "preview": "node tools/serve.mjs",
+    "test": "node scripts/check-core.mjs && node tools/check-browser-core.mjs",
+    "test:browser": "node tools/browser-check.mjs",
+    "check:core": "node scripts/check-core.mjs",
+    "check:content": "node tools/check-content.mjs",
+    "check:migration": "node tools/check-migration.mjs",
+    "check:learning": "node tools/check-learning.mjs",
+    "check:glossary": "node tools/check-glossary.mjs",
+    "check:theme": "node tools/check-theme.mjs",
+    "check:foundations": "node tools/check-foundations.mjs",
+    "check:full-mock": "node tools/check-full-mock.mjs",
+    "check:sounds": "node tools/check-sounds.mjs",
+    "check:path": "node tools/check-path.mjs",
+    "check:advanced": "node tools/check-advanced.mjs",
+    "package:pages": "node tools/package-site.mjs"
+  },
+  "engines": { "node": ">=24.0.0" },
+  "description": "Dependency-free JLPT N5–N1 study with integrated learning paths and optional dashboard widgets. Open index.html directly."
+}

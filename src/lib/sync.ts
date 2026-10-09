@@ -63,6 +63,7 @@ export function setupSync(repository: any, onExternalUpdate: (progress: any) => 
                 onExternalUpdate(validated);
               } catch (e) {
                 console.error("Invalid cloud progress", e);
+                alert("Cloud Sync Error: The progress received from the cloud could not be validated.\n\nDetails: " + (e.message || e) + "\n\nThis usually happens if one of your devices is running an older version of the app. Please clear the website data on this device and reload to update.");
               }
               isSavingToCloud = false;
             }

@@ -5,6 +5,17 @@
     const E = window.KotobaEngine;
     const S = window.KotobaStorage;
     const repository = window.KotobaRepository.createLocalProgressRepository();
+    
+    let syncManager = null;
+    if (window.KotobaSync) {
+        syncManager = window.KotobaSync.setupSync(repository, (newProgress) => {
+            update(newProgress);
+        }, () => {
+            render();
+        });
+        window.KotobaSyncManager = syncManager;
+    }
+
     const U = window.KotobaUI;
     const { el, button, ja, mixed, icon, card, paragraph: p, tag, actions, sectionTitle: title, externalLink: link } = U;
     const questionMap = Object.fromEntries(C.questions.map(q => [q.id, q]));
@@ -380,6 +391,7 @@
             if (!played)
                 notice(progress.settings.soundEffects === false ? 'Turn on sound effects to preview them.' : 'Sound could not play in this browser. Written feedback is still available.');
         }, 'button secondary small', { id: 'preview-sounds', disabled: progress.settings.soundEffects === false })), !window.KotobaSounds?.available() ? p('This browser does not support sound effects. Study feedback remains available in text.') : '');
+        const cloudSync = el('section', { className: 'card settings-card' }, title('Cloud Sync'), p('Sign in to sync your progress automatically between devices.'), window.KotobaSyncManager?.getCurrentUser() ? actions(p('Signed in as ' + (window.KotobaSyncManager.getCurrentUser().displayName || 'User')), button('Sign out', () => window.KotobaSyncManager.logout(), 'button secondary')) : actions(button('Sign in with Google', () => window.KotobaSyncManager?.login(), 'button primary')));
         const backup = el('section', { className: 'card settings-card' }, title('Keep your progress safe'), p('Progress stays in this browser. Export a JSON backup before switching browsers, opening the app at a different address, or clearing browser data.', 'section-description'), actions(button([icon('download'), 'Export progress'], () => exportData(), 'button secondary'), button([icon('upload'), 'Import backup'], () => fileInput.click(), 'button secondary', { id: 'import-backup' }), fileInput), p(`Imports are validated before replacing progress. Schema 1 · content ${C.CONTENT_VERSION}.`), recovery ? el('div', { className: 'notice warning' }, p(loaded.warning), button('Download original saved data', () => {
             try {
                 const raw = repository.readOriginalRaw();
@@ -393,7 +405,7 @@
             const score = E.gradeAttempt(a, questionMap);
             return el('div', { className: 'activity-item' }, icon('check'), el('div', {}, el('strong', {}, a.type === 'mock' ? a.mock ? `${a.mock.level.toUpperCase()} full mock test` : 'Earlier mini mock test' : a.isRetry ? 'Mistake retry' : 'Learning practice'), p(`${date(a.submittedAt)} · ${score.total ? `${score.correct}/${score.total} correct` : 'Unscored script study'} · ${score.unanswered} unanswered`)), button('View results', () => navigate('practice', a.id), 'button ghost small'));
         })) : p('Your completed sessions will appear here.', 'empty-state'));
-        return el('div', { className: 'content-stack' }, el('div', { className: 'settings-grid' }, preferences, backup), window.KotobaPreferences.render(ctx), window.KotobaOffline.renderSettings(ctx), window.KotobaMotivation.renderSettings(ctx), window.KotobaLearnLab.renderTools(ctx), historyCard, card(title('Original lessons. Your own pace.'), p('Original integrated N5–N1 learning paths combine words, kanji, grammar, reading and listening. Word and grammar selections are study guides; JLPT does not publish an exhaustive syllabus. Full mocks use the official section timings with original practice questions. Results are raw practice accuracy, with no passing prediction. Browser speech is a practice fallback. Your progress stays on this device unless you export a backup.'), p([link('Official JLPT level descriptions ↗', 'https://www.jlpt.jp/e/about/levelsummary.html'), ' · ', link('Official JLPT FAQ ↗', 'https://www.jlpt.jp/e/faq/')])));
+        return el('div', { className: 'content-stack' }, el('div', { className: 'settings-grid' }, preferences, cloudSync, backup), window.KotobaPreferences.render(ctx), window.KotobaOffline.renderSettings(ctx), window.KotobaMotivation.renderSettings(ctx), window.KotobaLearnLab.renderTools(ctx), historyCard, card(title('Original lessons. Your own pace.'), p('Original integrated N5–N1 learning paths combine words, kanji, grammar, reading and listening. Word and grammar selections are study guides; JLPT does not publish an exhaustive syllabus. Full mocks use the official section timings with original practice questions. Results are raw practice accuracy, with no passing prediction. Browser speech is a practice fallback. Your progress stays on this device unless you export a backup.'), p([link('Official JLPT level descriptions ↗', 'https://www.jlpt.jp/e/about/levelsummary.html'), ' · ', link('Official JLPT FAQ ↗', 'https://www.jlpt.jp/e/faq/')])));
     }
     function openModal(kind) { modalReturn = kind === 'import' ? { id: 'import-backup' } : captureFocus(); modal = kind; render(); document.querySelector('[role="dialog"] button')?.focus(); }
     function closeModal() { modal = null; imported = null; render(); restoreFocus(modalReturn); }
@@ -575,3 +587,4 @@
     tick();
     setInterval(tick, 500);
 })();
+

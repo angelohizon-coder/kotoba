@@ -16,6 +16,7 @@ const modules = [
   { source: 'src/lib/preferences.ts', output: 'preference-model.js', namespace: 'KotobaPreferenceModel' },
   { source: 'src/lib/learnlab.ts', output: 'learnlab-model.js', namespace: 'KotobaLearnLabModel' },
   { source: 'src/lib/motivation.ts', output: 'motivation-engine.js', namespace: 'KotobaMotivationEngine' },
+  { source: 'src/lib/sync.ts', output: 'sync.js', namespace: 'KotobaSync' },
 ];
 
 async function resolveSource(specifier, parent) {

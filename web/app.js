@@ -379,7 +379,7 @@
             const played = await window.KotobaSounds?.play('complete', progress.settings.soundEffects !== false);
             if (!played)
                 notice(progress.settings.soundEffects === false ? 'Turn on sound effects to preview them.' : 'Sound could not play in this browser. Written feedback is still available.');
-        }, 'button secondary small', { id: 'preview-sounds', disabled: progress.settings.soundEffects === false })), !window.KotobaSounds?.available() ? p('This browser does not support sound effects. Study feedback remains available in text.') : null);
+        }, 'button secondary small', { id: 'preview-sounds', disabled: progress.settings.soundEffects === false })), !window.KotobaSounds?.available() ? p('This browser does not support sound effects. Study feedback remains available in text.') : '');
         const backup = el('section', { className: 'card settings-card' }, title('Keep your progress safe'), p('Progress stays in this browser. Export a JSON backup before switching browsers, opening the app at a different address, or clearing browser data.', 'section-description'), actions(button([icon('download'), 'Export progress'], () => exportData(), 'button secondary'), button([icon('upload'), 'Import backup'], () => fileInput.click(), 'button secondary', { id: 'import-backup' }), fileInput), p(`Imports are validated before replacing progress. Schema 1 · content ${C.CONTENT_VERSION}.`), recovery ? el('div', { className: 'notice warning' }, p(loaded.warning), button('Download original saved data', () => {
             try {
                 const raw = repository.readOriginalRaw();

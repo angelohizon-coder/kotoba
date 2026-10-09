@@ -24,19 +24,22 @@ export function setupSync(repository: any, onExternalUpdate: (progress: any) => 
     let currentUser = null;
     let unsubscribeSync = null;
     let isSavingToCloud = false;
+    let syncTimeout = null;
 
     const originalSave = repository.save;
     
     repository.save = (progress) => {
       const result = originalSave(progress);
       if (currentUser && !isSavingToCloud) {
-        db.collection('users').doc(currentUser.uid).set({
-          progress: progress,
-          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }).catch(err => {
-          console.error("Firebase sync error:", err);
-          alert("Cloud Sync Error: " + err.message + "\n\nPlease ensure you have enabled Firestore Database in your Firebase Console and set up the correct Security Rules.");
-        });
+        if (syncTimeout) clearTimeout(syncTimeout);
+        syncTimeout = setTimeout(() => {
+          db.collection('users').doc(currentUser.uid).set({
+            progress: progress,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          }).catch(err => {
+            console.error("Firebase sync error:", err);
+          });
+        }, 1500);
       }
       return result;
     };
@@ -62,8 +65,7 @@ export function setupSync(repository: any, onExternalUpdate: (progress: any) => 
                 repository.save(validated);
                 onExternalUpdate(validated);
               } catch (e) {
-                console.error("Invalid cloud progress", e);
-                alert("Cloud Sync Error: The progress received from the cloud could not be validated.\n\nDetails: " + (e.message || e) + "\n\nThis usually happens if one of your devices is running an older version of the app. Please clear the website data on this device and reload to update.");
+                console.error("Invalid cloud progress:", e);
               }
               isSavingToCloud = false;
             }
@@ -75,7 +77,7 @@ export function setupSync(repository: any, onExternalUpdate: (progress: any) => 
     return {
       login: () => {
         const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).catch(err => alert("Login failed: " + err.message));
+        auth.signInWithPopup(provider).catch(err => console.error("Login failed:", err));
       },
       logout: () => auth.signOut(),
       getCurrentUser: () => currentUser

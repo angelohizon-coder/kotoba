@@ -33,7 +33,10 @@ export function setupSync(repository: any, onExternalUpdate: (progress: any) => 
         db.collection('users').doc(currentUser.uid).set({
           progress: progress,
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }).catch(err => console.error("Firebase sync error:", err));
+        }).catch(err => {
+          console.error("Firebase sync error:", err);
+          alert("Cloud Sync Error: " + err.message + "\n\nPlease ensure you have enabled Firestore Database in your Firebase Console and set up the correct Security Rules.");
+        });
       }
       return result;
     };

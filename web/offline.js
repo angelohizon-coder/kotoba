@@ -88,7 +88,7 @@
     return installing;
   }
   function renderSettings(ctx) {
-    const U = global.KotobaUI, { el, button, card, paragraph: p } = U;
+    const U = global.KotobaUI, { el, button, card, paragraph: p, actions } = U;
     const fileMode = location.protocol === 'file:';
     const settings = ctx.progress().settings;
     const enabled = settings.offlineCaching === true || settings.offlineCaching !== false && location.protocol === 'https:';
@@ -97,20 +97,22 @@
       el('p', { id: 'offline-library-status', className: 'section-description', role: 'status' }, 'Library: ' + state.cache.replaceAll('-', ' ') + ' · device archive: ' + state.archive.replaceAll('-', ' ')),
       el('label', { className: 'offline-toggle' }, el('input', { type: 'checkbox', id: 'offline-cache-toggle', checked: enabled, disabled: fileMode,
         onChange: event => { ctx.update(current => ({ ...current, settings: { ...current.settings, offlineCaching: event.target.checked } })); ensure(ctx.progress().settings); } }), 'Keep hosted study assets for offline use'),
-      button('Apply library update and reload', () => {
-        const active = ctx.progress().attempts.find(a => a.id === ctx.progress().activeAttemptId);
-        if (active?.status === 'in-progress' || ctx.progress().learnlab?.activeSessionId) { ctx.notice('Finish the saved session before applying the library update.'); return; }
-        reloadRequested = true; registration?.waiting?.postMessage({ type: 'SKIP_WAITING' });
-      }, 'button secondary', { id: 'apply-library-update', hidden: state.cache !== 'update-ready' }),
-      button('Download device archive', async () => {
-        try {
-          const record = await readArchive();
-          if (!record) { ctx.notice('The archive is empty. Export current progress instead.'); return; }
-          const url = URL.createObjectURL(new Blob([JSON.stringify(record.progress, null, 2)], { type: 'application/json' }));
-          const link = el('a', { href: url, download: 'kotoba-device-archive.json' }); document.body.append(link); link.click(); link.remove();
-          setTimeout(() => URL.revokeObjectURL(url), 1000); ctx.notice('Archive downloaded. Use Import backup to review and restore it.');
-        } catch { ctx.notice('The device archive is unavailable. Current progress can still be exported.'); }
-      }, 'button secondary'),
+      actions(
+        button('Apply library update and reload', () => {
+          const active = ctx.progress().attempts.find(a => a.id === ctx.progress().activeAttemptId);
+          if (active?.status === 'in-progress' || ctx.progress().learnlab?.activeSessionId) { ctx.notice('Finish the saved session before applying the library update.'); return; }
+          reloadRequested = true; registration?.waiting?.postMessage({ type: 'SKIP_WAITING' });
+        }, 'button secondary', { id: 'apply-library-update', hidden: state.cache !== 'update-ready' }),
+        button('Download device archive', async () => {
+          try {
+            const record = await readArchive();
+            if (!record) { ctx.notice('The archive is empty. Export current progress instead.'); return; }
+            const url = URL.createObjectURL(new Blob([JSON.stringify(record.progress, null, 2)], { type: 'application/json' }));
+            const link = el('a', { href: url, download: 'kotoba-device-archive.json' }); document.body.append(link); link.click(); link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000); ctx.notice('Archive downloaded. Use Import backup to review and restore it.');
+          } catch { ctx.notice('The device archive is unavailable. Current progress can still be exported.'); }
+        }, 'button secondary')
+      ),
       p('Cloud sync is not connected. Device archive data stays in this browser. Exported backups remain the portable way to move progress.'),
       state.error ? p(state.error) : null);
   }
